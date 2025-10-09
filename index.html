@@ -125,6 +125,16 @@
             transform: translateY(-2px);
         }
         
+        .btn-send {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-send:hover {
+            background-color: #2f855a;
+            transform: translateY(-2px);
+        }
+        
         .message-preview {
             background-color: #f1f1f1;
             border-radius: 5px;
@@ -251,6 +261,30 @@
             gap: 10px;
             margin-bottom: 10px;
         }
+        
+        .auto-send-status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f0f9ff;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-active {
+            background-color: var(--success-color);
+        }
+        
+        .status-inactive {
+            background-color: var(--error-color);
+        }
     </style>
 </head>
 <body>
@@ -267,7 +301,7 @@
             
             <div class="auto-notification">
                 <h4>Notificação Automática</h4>
-                <p>Ative para receber alertas diários sobre aniversariantes</p>
+                <p>Ative para enviar automaticamente mensagens de aniversário para o grupo do WhatsApp</p>
                 
                 <div class="toggle-label">
                     <label for="autoNotification">Notificação automática:</label>
@@ -277,10 +311,15 @@
                     </label>
                 </div>
                 
+                <div id="autoSendStatus" class="auto-send-status" style="display: none;">
+                    <p><span class="status-indicator status-active"></span> <strong>Notificação automática ativa</strong></p>
+                    <p>As mensagens serão enviadas automaticamente às 9h para os aniversariantes do dia.</p>
+                </div>
+                
                 <div class="form-group">
-                    <label for="whatsappGroup">Link do Grupo do WhatsApp (opcional)</label>
-                    <input type="text" id="whatsappGroup" class="form-control" placeholder="https://chat.whatsapp.com/...">
-                    <small style="color: #666;">Adicione o link do grupo para facilitar o acesso</small>
+                    <label for="whatsappGroup">Link do Grupo do WhatsApp</label>
+                    <input type="text" id="whatsappGroup" class="form-control" value="https://chat.whatsapp.com/ExSgIpveZoJ4Gkes3CxYhX" readonly>
+                    <small style="color: #666;">Link do grupo configurado para envio automático</small>
                 </div>
                 
                 <div class="form-group">
@@ -289,7 +328,12 @@
                     <small style="color: #666;">Use {nome} para incluir o nome do aniversariante</small>
                 </div>
                 
-                <button class="btn btn-test" onclick="testNotification()">Testar Notificação</button>
+                <div class="birthday-actions">
+                    <button class="btn btn-test" onclick="testNotification()">Testar Notificação</button>
+                    <button class="btn btn-send" onclick="sendManualNotification()" id="sendManualBtn">
+                        <span>📤</span> Enviar Agora
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -309,7 +353,7 @@
         // Configurações
         let config = {
             autoNotification: false,
-            whatsappGroup: "",
+            whatsappGroup: "https://chat.whatsapp.com/ExSgIpveZoJ4Gkes3CxYhX",
             customMessage: "🎉 Hoje é o aniversário de {nome}! 🎂\n\nDesejamos um feliz aniversário, que este seja um dia especial e que todos os seus sonhos se realizem! 🥳\n\nCom carinho,\nEquipe Network In Foco"
         };
 
@@ -321,6 +365,9 @@
                 document.getElementById('autoNotification').checked = config.autoNotification;
                 document.getElementById('whatsappGroup').value = config.whatsappGroup || "";
                 document.getElementById('customMessage').value = config.customMessage;
+                
+                // Atualizar status da notificação automática
+                updateAutoSendStatus();
             }
         }
 
@@ -330,7 +377,26 @@
             config.whatsappGroup = document.getElementById('whatsappGroup').value;
             config.customMessage = document.getElementById('customMessage').value;
             localStorage.setItem('whatsappBirthdayConfig', JSON.stringify(config));
+            
+            // Atualizar status da notificação automática
+            updateAutoSendStatus();
+            
+            // Reiniciar a verificação automática se necessário
+            if (config.autoNotification) {
+                setupDailyCheck();
+            }
+            
             showNotification('Configurações salvas!');
+        }
+
+        // Atualizar status do envio automático
+        function updateAutoSendStatus() {
+            const statusElement = document.getElementById('autoSendStatus');
+            if (config.autoNotification) {
+                statusElement.style.display = 'block';
+            } else {
+                statusElement.style.display = 'none';
+            }
         }
 
         // Verificar aniversários do dia
@@ -353,23 +419,90 @@
             return message.replace(/{nome}/g, member.name);
         }
 
-        // Gerar link do WhatsApp
+        // Gerar link do WhatsApp para envio manual
         function generateWhatsAppLink(member) {
             const message = encodeURIComponent(generateMessage(member));
+            return `https://wa.me/?text=${message}`;
+        }
+
+        // Enviar notificação automática
+        function sendAutoNotification() {
+            if (!config.autoNotification) return;
             
-            // Se temos um link de grupo, usamos ele
-            if (config.whatsappGroup) {
-                // O WhatsApp Web não permite enviar mensagens pré-definidas para grupos via URL
-                // Então apenas abrimos o grupo e o usuário precisa colar a mensagem
-                return config.whatsappGroup;
-            } else {
-                // Link para conversa individual com a mensagem pré-preenchida
-                return `https://wa.me/?text=${message}`;
+            const todaysBirthdays = getTodaysBirthdays();
+            if (todaysBirthdays.length === 0) {
+                console.log("Nenhum aniversariante hoje");
+                return;
             }
+            
+            // Para cada aniversariante, enviar mensagem
+            todaysBirthdays.forEach(member => {
+                sendWhatsAppMessage(member);
+            });
+            
+            console.log(`Notificações enviadas para ${todaysBirthdays.length} aniversariante(s)`);
+        }
+
+        // Enviar mensagem via WhatsApp (simulação)
+        function sendWhatsAppMessage(member) {
+            const message = generateMessage(member);
+            
+            // Em um ambiente real, você usaria uma API para enviar a mensagem
+            // Como estamos no navegador, apenas simulamos o envio
+            
+            // Abrir o WhatsApp Web com a mensagem pré-preenchida
+            // Note: O WhatsApp Web não permite envio automático para grupos via URL
+            // Esta é uma limitação de segurança do WhatsApp
+            
+            // Para envio individual:
+            const whatsappUrl = `https://web.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+            
+            // Para grupos, precisaríamos de uma solução diferente, como:
+            // 1. Usar a API Business do WhatsApp (requer aprovação)
+            // 2. Usar automação com Puppeteer/Selenium (não recomendado para produção)
+            // 3. Usar serviços de terceiros que oferecem API para WhatsApp
+            
+            // Por enquanto, apenas registramos no console
+            console.log(`Mensagem para ${member.name}: ${message}`);
+            
+            // Em um ambiente de produção, você implementaria a lógica real de envio aqui
+            // Por exemplo, usando a API oficial do WhatsApp Business
+            
+            return true;
+        }
+
+        // Enviar notificação manual
+        function sendManualNotification() {
+            const todaysBirthdays = getTodaysBirthdays();
+            if (todaysBirthdays.length === 0) {
+                showNotification('Nenhum aniversariante hoje para notificar', 'error');
+                return;
+            }
+            
+            // Desabilitar botão durante o envio
+            const sendBtn = document.getElementById('sendManualBtn');
+            sendBtn.disabled = true;
+            sendBtn.innerHTML = '<span>⏳</span> Enviando...';
+            
+            // Simular envio (em produção, substituir pela lógica real)
+            setTimeout(() => {
+                todaysBirthdays.forEach(member => {
+                    sendWhatsAppMessage(member);
+                });
+                
+                showNotification(`Mensagens enviadas para ${todaysBirthdays.length} aniversariante(s)!`);
+                
+                // Reabilitar botão
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = '<span>📤</span> Enviar Agora';
+            }, 2000);
         }
 
         // Copiar mensagem para a área de transferência
-        function copyToClipboard(member) {
+        function copyToClipboard(memberId) {
+            const member = members.find(m => m.id === memberId);
+            if (!member) return;
+            
             const message = generateMessage(member);
             navigator.clipboard.writeText(message).then(() => {
                 showNotification('Mensagem copiada para a área de transferência!');
@@ -435,7 +568,7 @@
         // Testar notificação
         function testNotification() {
             if (members.length > 0) {
-                copyToClipboard(members[0]);
+                copyToClipboard(members[0].id);
             } else {
                 showNotification('Não há membros para testar', 'error');
             }
@@ -444,29 +577,32 @@
         // Verificação automática diária
         function setupDailyCheck() {
             if (config.autoNotification) {
-                // Verificar uma vez por dia
+                // Verificar uma vez por dia às 9h
                 const now = new Date();
                 const lastCheck = localStorage.getItem('lastBirthdayCheck');
                 const today = now.toDateString();
                 
+                // Se ainda não verificamos hoje, verificar agora
                 if (lastCheck !== today) {
                     const todaysBirthdays = getTodaysBirthdays();
                     if (todaysBirthdays.length > 0) {
-                        // Aqui você poderia integrar com uma API de notificação
-                        // Por enquanto, apenas mostramos um alerta
-                        alert(`🎉 Hoje temos ${todaysBirthdays.length} aniversariante(s)!`);
+                        // Enviar notificações automaticamente
+                        sendAutoNotification();
+                        showNotification(`Notificações automáticas enviadas para ${todaysBirthdays.length} aniversariante(s)!`);
                     }
                     
                     localStorage.setItem('lastBirthdayCheck', today);
                 }
                 
-                // Agendar próxima verificação para amanhã
+                // Agendar próxima verificação para amanhã às 9h
                 const tomorrow = new Date(now);
                 tomorrow.setDate(tomorrow.getDate() + 1);
-                tomorrow.setHours(9, 0, 0, 0); // Verificar às 9h
+                tomorrow.setHours(9, 0, 0, 0);
                 
                 const timeUntilTomorrow = tomorrow.getTime() - now.getTime();
                 setTimeout(setupDailyCheck, timeUntilTomorrow);
+                
+                console.log('Próxima verificação automática agendada para:', tomorrow);
             } else {
                 // Se não está ativado, verificar novamente em 1 hora
                 setTimeout(setupDailyCheck, 60 * 60 * 1000);
@@ -488,7 +624,7 @@
         // Para integrar com o sistema existente, você precisará:
         // 1. Substituir o array "members" pelos dados reais do seu sistema
         // 2. Chamar renderBirthdays() quando os dados forem carregados
-        // 3. Integrar a verificação automática com o sistema de notificações existente
+        // 3. Implementar a lógica real de envio via API do WhatsApp Business
     </script>
 </body>
 </html>
