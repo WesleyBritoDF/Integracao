@@ -3,449 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notificações de Aniversário - WhatsApp API</title>
+    <title>Extrator de ID de Grupo WhatsApp</title>
     <style>
-        /* Manter todos os estilos anteriores e adicionar: */
-        .api-config {
-            background-color: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 5px;
-            padding: 15px;
-            margin-top: 20px;
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
         }
         
-        .api-status {
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #25D366;
+            text-align: center;
+        }
+        
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #25D366;
+            background-color: #f8fff8;
+        }
+        
+        code {
+            background: #2d3748;
+            color: #e2e8f0;
             padding: 10px;
             border-radius: 5px;
+            display: block;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .result {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        button {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
             margin: 10px 0;
         }
         
-        .status-connected {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
+        button:hover {
+            background: #128C7E;
         }
         
-        .status-disconnected {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
+        .methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
         }
         
-        .api-test-area {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
+        .method-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            background: white;
+        }
+        
+        @media (max-width: 768px) {
+            .methods {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎉 Notificações de Aniversário</h1>
-        <p class="description">Envie automaticamente mensagens de aniversário para o grupo do WhatsApp</p>
+        <h1>🔍 Extrator de ID de Grupo WhatsApp</h1>
         
-        <div id="birthdays-container">
-            <!-- Aniversariantes do dia serão inseridos aqui -->
+        <div class="warning">
+            <strong>⚠️ Aviso Importante:</strong> Estes métodos funcionam apenas no WhatsApp Web e podem parar de funcionar com atualizações futuras.
         </div>
         
-        <!-- Nova seção de configuração da API -->
-        <div class="config-section">
-            <h3>Configurações da API WhatsApp</h3>
-            
-            <div class="api-config">
-                <h4>Configuração de Conexão</h4>
-                
-                <div class="form-group">
-                    <label for="apiProvider">Provedor da API:</label>
-                    <select id="apiProvider" class="form-control">
-                        <option value="whatsapp-business">WhatsApp Business API</option>
-                        <option value="twilio">Twilio</option>
-                        <option value="apizap">APIZap</option>
-                        <option value="custom">Customizada</option>
-                    </select>
+        <div class="methods">
+            <div class="method-card">
+                <h3>📱 Método 1: WhatsApp Web (Console)</h3>
+                <div class="step">
+                    <strong>Passo 1:</strong> Abra o <a href="https://web.whatsapp.com" target="_blank">WhatsApp Web</a>
                 </div>
-                
-                <div id="whatsapp-business-config" class="api-config-section">
-                    <div class="form-group">
-                        <label for="phoneNumberId">Phone Number ID:</label>
-                        <input type="text" id="phoneNumberId" class="form-control" placeholder="1234567890">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="accessToken">Access Token:</label>
-                        <input type="password" id="accessToken" class="form-control" placeholder="Seu token de acesso">
-                    </div>
+                <div class="step">
+                    <strong>Passo 2:</strong> Abra o grupo desejado
                 </div>
-                
-                <div id="twilio-config" class="api-config-section" style="display: none;">
-                    <div class="form-group">
-                        <label for="accountSid">Account SID:</label>
-                        <input type="text" id="accountSid" class="form-control">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="twilioAuthToken">Auth Token:</label>
-                        <input type="password" id="twilioAuthToken" class="form-control">
-                    </div>
-                </div>
-                
-                <div id="apizap-config" class="api-config-section" style="display: none;">
-                    <div class="form-group">
-                        <label for="apizapKey">API Key:</label>
-                        <input type="password" id="apizapKey" class="form-control">
-                    </div>
-                </div>
-                
-                <div id="custom-config" class="api-config-section" style="display: none;">
-                    <div class="form-group">
-                        <label for="customEndpoint">Endpoint da API:</label>
-                        <input type="text" id="customEndpoint" class="form-control" placeholder="https://api.exemplo.com/send">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="customHeaders">Headers (JSON):</label>
-                        <textarea id="customHeaders" class="form-control" rows="3" placeholder='{"Authorization": "Bearer token", "Content-Type": "application/json"}'></textarea>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="groupId">ID do Grupo:</label>
-                    <input type="text" id="groupId" class="form-control" placeholder="ID do grupo WhatsApp">
-                    <small style="color: #666;">Para WhatsApp Business API, use o ID do grupo. Para outros serviços, consulte a documentação.</small>
-                </div>
-                
-                <div id="apiStatus" class="api-status status-disconnected">
-                    🔴 API não configurada
-                </div>
-                
-                <div class="api-test-area">
-                    <button class="btn btn-test" onclick="testAPIConnection()">Testar Conexão API</button>
-                    <button class="btn btn-send" onclick="sendTestMessage()">Enviar Mensagem de Teste</button>
-                </div>
-            </div>
-            
-            <div class="auto-notification">
-                <h4>Notificação Automática</h4>
-                <p>Ative para enviar automaticamente mensagens de aniversário para o grupo do WhatsApp</p>
-                
-                <div class="toggle-label">
-                    <label for="autoNotification">Notificação automática:</label>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="autoNotification">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <div id="autoSendStatus" class="auto-send-status" style="display: none;">
-                    <p><span class="status-indicator status-active"></span> <strong>Notificação automática ativa</strong></p>
-                    <p>As mensagens serão enviadas automaticamente às 9h para os aniversariantes do dia.</p>
-                </div>
-                
-                <div class="form-group">
-                    <label for="customMessage">Mensagem Personalizada</label>
-                    <textarea id="customMessage" class="form-control" rows="3" placeholder="Personalize a mensagem que será enviada..."></textarea>
-                    <small style="color: #666;">Use {nome} para incluir o nome do aniversariante</small>
-                </div>
-                
-                <div class="birthday-actions">
-                    <button class="btn btn-test" onclick="testNotification()">Testar Notificação</button>
-                    <button class="btn btn-send" onclick="sendManualNotification()" id="sendManualBtn">
-                        <span>📤</span> Enviar Agora
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+                <div class="step">
+                    <strong>Passo 3:</strong> Pressione F12 e cole no Console:
+                    <code id="code1">// Cole este código no Console
+function getGroupId() {
+    // Versão simplificada - funcional em algumas versões
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupCode = urlParams.get('code');
     
-    <div class="notification" id="notification">
-        Mensagem copiada para a área de transferência!
+    if (groupCode) {
+        console.log('Código do Grupo:', groupCode);
+        return groupCode;
+    }
+    
+    // Tentar encontrar em elementos da página
+    const groupElements = document.querySelectorAll('[data-id*="g.us"]');
+    if (groupElements.length > 0) {
+        const groupId = groupElements[0].getAttribute('data-id');
+        console.log('ID do Grupo encontrado:', groupId);
+        return groupId;
+    }
+    
+    console.log('ID do grupo não encontrado automaticamente');
+    console.log('Tente o método avançado abaixo');
+    return null;
+}
+
+getGroupId();</code>
+                </div>
+            </div>
+            
+            <div class="method-card">
+                <h3>🔧 Método 2: WhatsApp Business API</h3>
+                <div class="step">
+                    <strong>Para desenvolvedores:</strong> Use o webhook para capturar o ID quando receber mensagens do grupo.
+                </div>
+                <code>// No webhook:
+const groupId = entry.changes[0].value.messages[0].from;
+console.log('ID do Grupo:', groupId);</code>
+            </div>
+        </div>
+        
+        <h2>Método Avançado (Requier Acesso ao Store)</h2>
+        <div class="warning">
+            ⚠️ Este método pode parar de funcionar com atualizações do WhatsApp Web
+        </div>
+        
+        <code id="advancedCode">// Cole este código no Console do WhatsApp Web
+// Aguarde a página carregar completamente
+
+function getAdvancedGroupId() {
+    try {
+        // Método 1: Via Store do WhatsApp
+        if (typeof Store !== 'undefined' && Store.Chat) {
+            const activeChat = Store.Chat.getActive();
+            if (activeChat && activeChat.isGroup) {
+                const groupId = activeChat.id._serialized || activeChat.id;
+                const groupName = activeChat.name || activeChat.formattedTitle;
+                
+                console.log('🎉 ID do Grupo encontrado!');
+                console.log('📝 Nome:', groupName);
+                console.log('🆔 ID:', groupId);
+                console.log('👥 Participantes:', activeChat.groupMetadata?.participants?.length || 'N/A');
+                
+                // Copiar para área de transferência
+                navigator.clipboard.writeText(groupId).then(() => {
+                    console.log('✅ ID copiado para a área de transferência!');
+                });
+                
+                return {
+                    success: true,
+                    id: groupId,
+                    name: groupName,
+                    participants: activeChat.groupMetadata?.participants?.length
+                };
+            }
+        }
+        
+        // Método 2: Via elementos da DOM
+        const groupHeader = document.querySelector('[data-testid="conversation-header"]');
+        if (groupHeader) {
+            // Extrair informações dos elementos
+            const groupName = groupHeader.querySelector('[data-testid="conversation-info-header"]')?.textContent;
+            
+            console.log('ℹ️ Nome do Grupo (DOM):', groupName);
+            console.log('🔍 Inspecione os elementos para encontrar o ID');
+        }
+        
+        // Método 3: Via network requests
+        console.log('🌐 Verifique a aba Network para requests contendo "group" ou "g.us"');
+        
+        return { success: false, error: 'Grupo não encontrado' };
+        
+    } catch (error) {
+        console.error('❌ Erro:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+// Executar a função
+getAdvancedGroupId();</code>
+
+        <button onclick="copyCode('advancedCode')">📋 Copiar Código Avançado</button>
+        
+        <div class="result" id="result" style="display: none;">
+            <h3>Resultado:</h3>
+            <div id="resultContent"></div>
+        </div>
+
+        <h2>📝 Formato dos IDs de Grupo</h2>
+        <ul>
+            <li><strong>WhatsApp Business API:</strong> <code>120363043715066456@g.us</code></li>
+            <li><strong>Grupo Normal:</strong> <code>5511999999999-1584567890@g.us</code></li>
+            <li><strong>Padrão:</strong> <code>[NÚMERO]-[TIMESTAMP]@g.us</code></li>
+        </ul>
     </div>
 
     <script>
-        // Configurações da API
-        let apiConfig = {
-            provider: 'whatsapp-business',
-            phoneNumberId: '',
-            accessToken: '',
-            accountSid: '',
-            twilioAuthToken: '',
-            apizapKey: '',
-            customEndpoint: '',
-            customHeaders: '{}',
-            groupId: '',
-            isConfigured: false
-        };
-
-        // Carregar configurações da API
-        function loadAPIConfig() {
-            const savedConfig = localStorage.getItem('whatsappAPIConfig');
-            if (savedConfig) {
-                apiConfig = { ...apiConfig, ...JSON.parse(savedConfig) };
-                updateAPIConfigUI();
-                checkAPIStatus();
-            }
-        }
-
-        // Atualizar UI da configuração da API
-        function updateAPIConfigUI() {
-            document.getElementById('apiProvider').value = apiConfig.provider;
-            document.getElementById('phoneNumberId').value = apiConfig.phoneNumberId;
-            document.getElementById('accessToken').value = apiConfig.accessToken;
-            document.getElementById('accountSid').value = apiConfig.accountSid;
-            document.getElementById('twilioAuthToken').value = apiConfig.twilioAuthToken;
-            document.getElementById('apizapKey').value = apiConfig.apizapKey;
-            document.getElementById('customEndpoint').value = apiConfig.customEndpoint;
-            document.getElementById('customHeaders').value = apiConfig.customHeaders;
-            document.getElementById('groupId').value = apiConfig.groupId;
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const textArea = document.createElement('textarea');
+            textArea.value = codeElement.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
             
-            // Mostrar/ocultar seções baseadas no provedor
-            document.querySelectorAll('.api-config-section').forEach(section => {
-                section.style.display = 'none';
-            });
-            document.getElementById(`${apiConfig.provider}-config`).style.display = 'block';
+            alert('Código copiado para a área de transferência!');
         }
-
-        // Salvar configurações da API
-        function saveAPIConfig() {
-            apiConfig.provider = document.getElementById('apiProvider').value;
-            apiConfig.phoneNumberId = document.getElementById('phoneNumberId').value;
-            apiConfig.accessToken = document.getElementById('accessToken').value;
-            apiConfig.accountSid = document.getElementById('accountSid').value;
-            apiConfig.twilioAuthToken = document.getElementById('twilioAuthToken').value;
-            apiConfig.apizapKey = document.getElementById('apizapKey').value;
-            apiConfig.customEndpoint = document.getElementById('customEndpoint').value;
-            apiConfig.customHeaders = document.getElementById('customHeaders').value;
-            apiConfig.groupId = document.getElementById('groupId').value;
-            
-            localStorage.setItem('whatsappAPIConfig', JSON.stringify(apiConfig));
-            checkAPIStatus();
-            showNotification('Configurações da API salvas!');
+        
+        // Simulação de resultado (para demonstração)
+        function showResult() {
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('resultContent').innerHTML = `
+                <p><strong>✅ ID Encontrado com Sucesso!</strong></p>
+                <p><strong>Nome do Grupo:</strong> Network In Foco</p>
+                <p><strong>ID do Grupo:</strong> <code>120363043715066456@g.us</code></p>
+                <p><strong>Participantes:</strong> 45</p>
+            `;
         }
-
-        // Verificar status da API
-        function checkAPIStatus() {
-            const statusElement = document.getElementById('apiStatus');
-            const hasRequiredConfig = (
-                apiConfig.groupId && 
-                (
-                    (apiConfig.provider === 'whatsapp-business' && apiConfig.phoneNumberId && apiConfig.accessToken) ||
-                    (apiConfig.provider === 'twilio' && apiConfig.accountSid && apiConfig.twilioAuthToken) ||
-                    (apiConfig.provider === 'apizap' && apiConfig.apizapKey) ||
-                    (apiConfig.provider === 'custom' && apiConfig.customEndpoint)
-                )
-            );
-            
-            if (hasRequiredConfig) {
-                statusElement.className = 'api-status status-connected';
-                statusElement.innerHTML = '🟢 API Configurada';
-                apiConfig.isConfigured = true;
-            } else {
-                statusElement.className = 'api-status status-disconnected';
-                statusElement.innerHTML = '🔴 API não configurada';
-                apiConfig.isConfigured = false;
-            }
-        }
-
-        // Enviar mensagem via API
-        async function sendViaAPI(message) {
-            if (!apiConfig.isConfigured) {
-                throw new Error('API não configurada');
-            }
-
-            switch (apiConfig.provider) {
-                case 'whatsapp-business':
-                    return await sendViaWhatsAppBusiness(message);
-                case 'twilio':
-                    return await sendViaTwilio(message);
-                case 'apizap':
-                    return await sendViaAPIZap(message);
-                case 'custom':
-                    return await sendViaCustomAPI(message);
-                default:
-                    throw new Error('Provedor não suportado');
-            }
-        }
-
-        // Implementação para WhatsApp Business API
-        async function sendViaWhatsAppBusiness(message) {
-            try {
-                const response = await fetch(`https://graph.facebook.com/v17.0/${apiConfig.phoneNumberId}/messages`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${apiConfig.accessToken}`,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        messaging_product: "whatsapp",
-                        to: apiConfig.groupId,
-                        type: "text",
-                        text: {
-                            body: message
-                        }
-                    })
-                });
-
-                const data = await response.json();
-                
-                if (data.error) {
-                    throw new Error(data.error.message);
-                }
-                
-                return { success: true, data };
-            } catch (error) {
-                console.error('Erro WhatsApp Business API:', error);
-                return { success: false, error: error.message };
-            }
-        }
-
-        // Implementação para Twilio
-        async function sendViaTwilio(message) {
-            try {
-                // Nota: Twilio requer chamada server-side por questões de segurança
-                // Esta é uma implementação simplificada
-                const response = await fetch('/api/send-whatsapp', { // Seu endpoint backend
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        provider: 'twilio',
-                        accountSid: apiConfig.accountSid,
-                        authToken: apiConfig.twilioAuthToken,
-                        to: apiConfig.groupId,
-                        message: message
-                    })
-                });
-
-                return await response.json();
-            } catch (error) {
-                console.error('Erro Twilio:', error);
-                return { success: false, error: error.message };
-            }
-        }
-
-        // Implementação para APIZap
-        async function sendViaAPIZap(message) {
-            try {
-                const response = await fetch('https://api.apizap.com/messages/send', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${apiConfig.apizapKey}`,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        number: apiConfig.groupId,
-                        message: message,
-                        type: 'group'
-                    })
-                });
-
-                const data = await response.json();
-                return { success: data.success, data };
-            } catch (error) {
-                console.error('Erro APIZap:', error);
-                return { success: false, error: error.message };
-            }
-        }
-
-        // Implementação para API Customizada
-        async function sendViaCustomAPI(message) {
-            try {
-                const headers = JSON.parse(apiConfig.customHeaders || '{}');
-                
-                const response = await fetch(apiConfig.customEndpoint, {
-                    method: 'POST',
-                    headers: headers,
-                    body: JSON.stringify({
-                        to: apiConfig.groupId,
-                        message: message
-                    })
-                });
-
-                const data = await response.json();
-                return { success: true, data };
-            } catch (error) {
-                console.error('Erro API Customizada:', error);
-                return { success: false, error: error.message };
-            }
-        }
-
-        // Testar conexão da API
-        async function testAPIConnection() {
-            if (!apiConfig.isConfigured) {
-                showNotification('Configure a API primeiro', 'error');
-                return;
-            }
-
-            const testBtn = document.querySelector('.btn-test');
-            const originalText = testBtn.innerHTML;
-            testBtn.innerHTML = '⏳ Testando...';
-            testBtn.disabled = true;
-
-            try {
-                const result = await sendViaAPI('🔧 Mensagem de teste do sistema de aniversários');
-                
-                if (result.success) {
-                    showNotification('✅ Conexão com API estabelecida com sucesso!');
-                } else {
-                    showNotification(`❌ Erro na API: ${result.error}`, 'error');
-                }
-            } catch (error) {
-                showNotification(`❌ Erro: ${error.message}`, 'error');
-            } finally {
-                testBtn.innerHTML = originalText;
-                testBtn.disabled = false;
-            }
-        }
-
-        // Enviar mensagem de teste
-        async function sendTestMessage() {
-            if (!apiConfig.isConfigured) {
-                showNotification('Configure a API primeiro', 'error');
-                return;
-            }
-
-            const testBtn = document.querySelector('.btn-send');
-            const originalText = testBtn.innerHTML;
-            testBtn.innerHTML = '⏳ Enviando...';
-            testBtn.disabled = true;
-
-            try {
-                const result = await sendViaAPI('🎉 Esta é uma mensagem de teste do sistema de notificações de aniversário!');
-                
-                if (result.success) {
-                    showNotification('✅ Mensagem de teste enviada com sucesso!');
-                } else {
-                    showNotification(`❌ Erro ao enviar: ${result.error}`, 'error');
-                }
-            } catch (error) {
-                showNotification(`❌ Erro: ${error.message}`, 'error');
-            } finally {
-                testBtn.innerHTML = originalText;
-                testBtn.disabled = false;
-            }
-        }
-
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', function() {
-            loadAPIConfig();
-            
-            // Event listeners
-            document.getElementById('apiProvider').addEventListener('change', function() {
-                apiConfig.provider = this.value;
-                updateAPIConfigUI();
-                saveAPIConfig();
-            });
-            
-            // Salvar configurações quando alteradas
-            const apiInputs = document.querySelectorAll('#phoneNumberId, #accessToken, #accountSid, #twilioAuthToken, #apizapKey, #customEndpoint, #customHeaders, #groupId');
-            apiInputs.forEach(input => {
-                input.addEventListener('change', saveAPIConfig);
-            });
-        });
-
-        // ... (manter o restante do código anterior)
     </script>
 </body>
 </html>
