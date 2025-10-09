@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NETWORK IN FOCO - Integração WhatsApp</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --success-color: #25D366;
+            --whatsapp-green: #25D366;
+            --whatsapp-light: #dcf8c6;
+            --accent-color: #e53e3e;
+            --light-color: #f7fafc;
+            --dark-color: #2d3748;
+            --admin-color: #805ad5;
+            --user-color: #319795;
+            --pending-color: #d69e2e;
+            --partner-color: #dd6b20;
+            --store-color: #38a169;
+            --birthday-color: #d53f8c;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text h1 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .logo-text h2 {
+            margin: 0.2rem 0 0 0;
+            font-size: 0.7rem;
+            color: #90cdf4;
+        }
+
+        /* WhatsApp Integration Section */
+        .whatsapp-section {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .section-title.whatsapp {
+            color: var(--whatsapp-green);
+        }
+
+        .section-title.whatsapp::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--whatsapp-green);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        .whatsapp-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Birthday Notifications */
+        .birthday-notifications {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #90caf9;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .birthday-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .birthday-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .birthday-list {
+            margin-top: 1rem;
+        }
+
+        .birthday-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(33, 150, 243, 0.2);
+        }
+
+        .birthday-item:last-child {
+            border-bottom: none;
+        }
+
+        .birthday-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+            border: 2px solid #42a5f5;
+        }
+
+        .birthday-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .birthday-info {
+            flex: 1;
+        }
+
+        .birthday-name {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .birthday-role {
+            font-size: 0.85rem;
+            color: #546e7a;
+        }
+
+        .birthday-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* WhatsApp Configuration */
+        .whatsapp-config {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        .config-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .config-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #cbd5e0;
+            border-radius: var(--radius);
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--whatsapp-green);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--whatsapp-green);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            gap: 0.5rem;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp-green);
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2c5282;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--whatsapp-green);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* WhatsApp Modal */
+        .whatsapp-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .whatsapp-modal-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .whatsapp-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .whatsapp-modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .whatsapp-modal-icon {
+            font-size: 3rem;
+            color: var(--whatsapp-green);
+            margin-bottom: 1rem;
+        }
+
+        .whatsapp-contacts {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .whatsapp-contact {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-contact:hover {
+            background-color: #f8f9fa;
+            border-color: var(--whatsapp-green);
+        }
+
+        .whatsapp-contact-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .whatsapp-contact-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .whatsapp-contact-info {
+            flex: 1;
+        }
+
+        .whatsapp-contact-name {
+            font-weight: 600;
+        }
+
+        .whatsapp-contact-role {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .whatsapp-contact-action {
+            color: var(--whatsapp-green);
+            font-weight: bold;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--success-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            z-index: 1002;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .whatsapp-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-image">
+                        <img src="https://jywmvnxurbtziixntuuq.supabase.co/storage/v1/object/public/Imagens/LogotipoS.jpeg" alt="NETWORK IN FOCO">
+                    </div>
+                    <div class="logo-text">
+                        <h1>NETWORK IN FOCO</h1>
+                        <h2>Integração WhatsApp</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- WhatsApp Integration Section -->
+        <section class="whatsapp-section">
+            <h2 class="section-title whatsapp">Integração com WhatsApp</h2>
+            
+            <div class="whatsapp-features">
+                <div class="feature-card">
+                    <div class="feature-icon">🎂</div>
+                    <h3>Notificações de Aniversário</h3>
+                    <p>Envie mensagens automáticas de parabéns para aniversariantes diretamente no WhatsApp.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📢</div>
+                    <h3>Comunicação com Membros</h3>
+                    <p>Entre em contato rapidamente com qualquer membro da rede através do WhatsApp.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Grupos de Comunidade</h3>
+                    <p>Conecte-se com grupos específicos da comunidade Network In Foco.</p>
+                </div>
+            </div>
+
+            <!-- Birthday Notifications -->
+            <div class="birthday-notifications">
+                <div class="birthday-header">
+                    <div class="birthday-icon">🎉</div>
+                    <div>
+                        <h3>Aniversariantes de Hoje</h3>
+                        <p>Envie mensagens de parabéns automaticamente</p>
+                    </div>
+                </div>
+                
+                <div class="birthday-list" id="birthdayList">
+                    <!-- Aniversariantes serão carregados aqui -->
+                </div>
+                
+                <div class="config-group">
+                    <div class="toggle-group">
+                        <label for="autoBirthdayNotifications">Notificações automáticas de aniversário:</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autoBirthdayNotifications">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <small>Quando ativado, o sistema irá notificar sobre aniversariantes todos os dias às 9h.</small>
+                </div>
+                
+                <button class="btn btn-whatsapp" onclick="sendAllBirthdayWishes()">
+                    <span>📱</span> Enviar Parabéns para Todos
+                </button>
+            </div>
+
+            <!-- WhatsApp Configuration -->
+            <div class="whatsapp-config">
+                <h3>Configurações do WhatsApp</h3>
+                
+                <div class="config-group">
+                    <label for="whatsappGroupLink">Link do Grupo Principal</label>
+                    <input type="text" id="whatsappGroupLink" class="form-control" placeholder="https://chat.whatsapp.com/...">
+                    <small>Adicione o link do grupo principal da Network In Foco</small>
+                </div>
+                
+                <div class="config-group">
+                    <label for="birthdayMessage">Mensagem de Aniversário Padrão</label>
+                    <textarea id="birthdayMessage" class="form-control" rows="3" placeholder="Digite a mensagem padrão para aniversários...">🎉 Parabéns, {nome}! 🎂
+
+Que este seja um dia especial e que todos os seus sonhos se realizem!
+
+Com carinho,
+Equipe Network In Foco</textarea>
+                    <small>Use {nome} para incluir o nome do aniversariante automaticamente</small>
+                </div>
+                
+                <div class="config-group">
+                    <label for="defaultMessage">Mensagem Padrão para Contato</label>
+                    <textarea id="defaultMessage" class="form-control" rows="3" placeholder="Digite a mensagem padrão para contatos...">Olá {nome}! 
+
+Estou entrando em contato através do sistema Network In Foco.
+
+Atenciosamente</textarea>
+                </div>
+                
+                <button class="btn btn-primary" onclick="saveWhatsAppConfig()">Salvar Configurações</button>
+            </div>
+
+            <!-- Quick Actions -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <h3>Ações Rápidas</h3>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+                    <button class="btn btn-outline" onclick="openWhatsAppModal()">
+                        <span>👥</span> Contatar Membros
+                    </button>
+                    <button class="btn btn-outline" onclick="openGroupChat()">
+                        <span>💬</span> Grupo Principal
+                    </button>
+                    <button class="btn btn-outline" onclick="testIntegration()">
+                        <span>🔧</span> Testar Integração
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float" onclick="openWhatsAppModal()">
+        💬
+    </div>
+
+    <!-- WhatsApp Modal -->
+    <div class="whatsapp-modal" id="whatsappModal">
+        <div class="whatsapp-modal-content">
+            <button class="whatsapp-modal-close" onclick="closeWhatsAppModal()">×</button>
+            
+            <div class="whatsapp-modal-header">
+                <div class="whatsapp-modal-icon">💬</div>
+                <h3>Enviar Mensagem via WhatsApp</h3>
+                <p>Selecione um contato para enviar mensagem</p>
+            </div>
+            
+            <div class="whatsapp-contacts" id="whatsappContacts">
+                <!-- Contatos serão carregados aqui -->
+            </div>
+            
+            <div class="config-group">
+                <label for="customMessage">Mensagem Personalizada</label>
+                <textarea id="customMessage" class="form-control" rows="3" placeholder="Digite sua mensagem..."></textarea>
+            </div>
+            
+            <button class="btn btn-whatsapp" style="width: 100%;" onclick="sendCustomMessage()">
+                <span>📤</span> Enviar Mensagem
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // Configurações do WhatsApp
+        let whatsappConfig = {
+            groupLink: "",
+            birthdayMessage: `🎉 Parabéns, {nome}! 🎂\n\nQue este seja um dia especial e que todos os seus sonhos se realizem!\n\nCom carinho,\nEquipe Network In Foco`,
+            defaultMessage: `Olá {nome}! \n\nEstou entrando em contato através do sistema Network In Foco.\n\nAtenciosamente`,
+            autoBirthdayNotifications: false
+        };
+
+        // Dados de exemplo (substitua pelos dados reais do seu sistema)
+        let members = [
+            { id: 1, name: "João Silva", role: "Desenvolvedor", phone: "5511999999999", birthday: new Date().toISOString().split('T')[0] },
+            { id: 2, name: "Maria Santos", role: "Designer", phone: "5511988888888", birthday: "1990-05-15" },
+            { id: 3, name: "Pedro Oliveira", role: "Gerente", phone: "5511977777777", birthday: "1985-12-20" }
+        ];
+
+        // Carregar configurações salvas
+        function loadWhatsAppConfig() {
+            const savedConfig = localStorage.getItem('networkWhatsAppConfig');
+            if (savedConfig) {
+                whatsappConfig = { ...whatsappConfig, ...JSON.parse(savedConfig) };
+                
+                // Atualizar UI
+                document.getElementById('whatsappGroupLink').value = whatsappConfig.groupLink || "";
+                document.getElementById('birthdayMessage').value = whatsappConfig.birthdayMessage;
+                document.getElementById('defaultMessage').value = whatsappConfig.defaultMessage;
+                document.getElementById('autoBirthdayNotifications').checked = whatsappConfig.autoBirthdayNotifications;
+            }
+        }
+
+        // Salvar configurações
+        function saveWhatsAppConfig() {
+            whatsappConfig.groupLink = document.getElementById('whatsappGroupLink').value;
+            whatsappConfig.birthdayMessage = document.getElementById('birthdayMessage').value;
+            whatsappConfig.defaultMessage = document.getElementById('defaultMessage').value;
+            whatsappConfig.autoBirthdayNotifications = document.getElementById('autoBirthdayNotifications').checked;
+            
+            localStorage.setItem('networkWhatsAppConfig', JSON.stringify(whatsappConfig));
+            showNotification('Configurações salvas com sucesso!');
+            
+            // Se ativou notificações automáticas, agenda a verificação
+            if (whatsappConfig.autoBirthdayNotifications) {
+                scheduleBirthdayCheck();
+            }
+        }
+
+        // Mostrar notificação
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.backgroundColor = type === 'error' ? 'var(--accent-color)' : 'var(--success-color)';
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Gerar link do WhatsApp
+        function generateWhatsAppLink(phone, message) {
+            // Formata o número (remove caracteres não numéricos e adiciona o código do país se necessário)
+            const formattedPhone = phone.replace(/\D/g, '');
+            const encodedMessage = encodeURIComponent(message);
+            return `https://wa.me/${formattedPhone}?text=${encodedMessage}`;
+        }
+
+        // Abrir link do WhatsApp
+        function openWhatsApp(phone, message) {
+            const link = generateWhatsAppLink(phone, message);
+            window.open(link, '_blank');
+        }
+
+        // Verificar aniversários do dia
+        function getTodaysBirthdays() {
+            const today = new Date();
+            const todayMonth = today.getMonth();
+            const todayDate = today.getDate();
+            
+            return members.filter(member => {
+                if (!member.birthday) return false;
+                
+                const birthday = new Date(member.birthday);
+                return birthday.getMonth() === todayMonth && birthday.getDate() === todayDate;
+            });
+        }
+
+        // Renderizar aniversariantes
+        function renderBirthdays() {
+            const container = document.getElementById('birthdayList');
+            const todaysBirthdays = getTodaysBirthdays();
+            
+            if (todaysBirthdays.length === 0) {
+                container.innerHTML = '<p>Nenhum aniversariante hoje.</p>';
+                return;
+            }
+            
+            container.innerHTML = todaysBirthdays.map(member => `
+                <div class="birthday-item">
+                    <div class="birthday-avatar">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="${member.name}">
+                    </div>
+                    <div class="birthday-info">
+                        <div class="birthday-name">${member.name}</div>
+                        <div class="birthday-role">${member.role}</div>
+                    </div>
+                    <div class="birthday-actions">
+                        <button class="btn btn-whatsapp" onclick="sendBirthdayWish('${member.id}')">
+                            <span>🎂</span> Parabéns
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Enviar mensagem de parabéns
+        function sendBirthdayWish(memberId) {
+            const member = members.find(m => m.id == memberId);
+            if (!member || !member.phone) {
+                showNotification('Membro não encontrado ou sem telefone cadastrado', 'error');
+                return;
+            }
+            
+            const message = whatsappConfig.birthdayMessage.replace(/{nome}/g, member.name);
+            openWhatsApp(member.phone, message);
+        }
+
+        // Enviar parabéns para todos os aniversariantes
+        function sendAllBirthdayWishes() {
+            const todaysBirthdays = getTodaysBirthdays();
+            
+            if (todaysBirthdays.length === 0) {
+                showNotification('Nenhum aniversariante hoje', 'info');
+                return;
+            }
+            
+            // Para múltiplos contatos, precisamos abrir individualmente
+            // Em um sistema real, você poderia usar a API Business do WhatsApp
+            todaysBirthdays.forEach((member, index) => {
+                setTimeout(() => {
+                    sendBirthdayWish(member.id);
+                }, index * 1000); // Delay de 1 segundo entre cada abertura
+            });
+            
+            showNotification(`Abrindo WhatsApp para ${todaysBirthdays.length} aniversariante(s)`);
+        }
+
+        // Abrir modal do WhatsApp
+        function openWhatsAppModal() {
+            const modal = document.getElementById('whatsappModal');
+            const contactsContainer = document.getElementById('whatsappContacts');
+            
+            // Renderizar contatos
+            contactsContainer.innerHTML = members.map(member => `
+                <div class="whatsapp-contact" onclick="selectContact('${member.id}')">
+                    <div class="whatsapp-contact-avatar">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="${member.name}">
+                    </div>
+                    <div class="whatsapp-contact-info">
+                        <div class="whatsapp-contact-name">${member.name}</div>
+                        <div class="whatsapp-contact-role">${member.role}</div>
+                    </div>
+                    <div class="whatsapp-contact-action">💬</div>
+                </div>
+            `).join('');
+            
+            modal.style.display = 'flex';
+        }
+
+        // Fechar modal do WhatsApp
+        function closeWhatsAppModal() {
+            document.getElementById('whatsappModal').style.display = 'none';
+        }
+
+        // Selecionar contato
+        let selectedContactId = null;
+
+        function selectContact(memberId) {
+            selectedContactId = memberId;
+            
+            // Destacar contato selecionado
+            document.querySelectorAll('.whatsapp-contact').forEach(contact => {
+                contact.style.borderColor = '#e2e8f0';
+                contact.style.backgroundColor = 'transparent';
+            });
+            
+            event.currentTarget.style.borderColor = 'var(--whatsapp-green)';
+            event.currentTarget.style.backgroundColor = 'var(--whatsapp-light)';
+        }
+
+        // Enviar mensagem personalizada
+        function sendCustomMessage() {
+            if (!selectedContactId) {
+                showNotification('Selecione um contato primeiro', 'error');
+                return;
+            }
+            
+            const member = members.find(m => m.id == selectedContactId);
+            if (!member || !member.phone) {
+                showNotification('Contato não encontrado ou sem telefone', 'error');
+                return;
+            }
+            
+            let message = document.getElementById('customMessage').value;
+            if (!message.trim()) {
+                // Usar mensagem padrão se não houver mensagem personalizada
+                message = whatsappConfig.defaultMessage.replace(/{nome}/g, member.name);
+            }
+            
+            openWhatsApp(member.phone, message);
+            closeWhatsAppModal();
+        }
+
+        // Abrir grupo do WhatsApp
+        function openGroupChat() {
+            if (!whatsappConfig.groupLink) {
+                showNotification('Configure o link do grupo primeiro', 'error');
+                return;
+            }
+            
+            window.open(whatsappConfig.groupLink, '_blank');
+        }
+
+        // Agendar verificação de aniversários
+        function scheduleBirthdayCheck() {
+            if (!whatsappConfig.autoBirthdayNotifications) return;
+            
+            // Verificar uma vez por dia às 9h
+            const now = new Date();
+            const nextCheck = new Date();
+            nextCheck.setHours(9, 0, 0, 0);
+            
+            if (now > nextCheck) {
+                nextCheck.setDate(nextCheck.getDate() + 1);
+            }
+            
+            const timeUntilNextCheck = nextCheck.getTime() - now.getTime();
+            
+            setTimeout(() => {
+                checkAndNotifyBirthdays();
+                // Agendar próxima verificação
+                scheduleBirthdayCheck();
+            }, timeUntilNextCheck);
+            
+            console.log('Próxima verificação de aniversários agendada para:', nextCheck);
+        }
+
+        // Verificar e notificar aniversários
+        function checkAndNotifyBirthdays() {
+            const todaysBirthdays = getTodaysBirthdays();
+            
+            if (todaysBirthdays.length > 0) {
+                // Em um sistema real, aqui você poderia:
+                // 1. Enviar notificação push
+                // 2. Enviar email
+                // 3. Registrar no console para administradores
+                
+                console.log(`🎉 Hoje temos ${todaysBirthdays.length} aniversariante(s)!`);
+                todaysBirthdays.forEach(member => {
+                    console.log(`- ${member.name} (${member.role})`);
+                });
+                
+                // Mostrar notificação para o usuário
+                if (Notification.permission === 'granted') {
+                    new Notification('Network In Foco - Aniversariantes', {
+                        body: `Hoje temos ${todaysBirthdays.length} aniversariante(s)!`,
+                        icon: 'https://jywmvnxurbtziixntuuq.supabase.co/storage/v1/object/public/Imagens/LogotipoS.jpeg'
+                    });
+                }
+            }
+        }
+
+        // Testar integração
+        function testIntegration() {
+            // Verificar se há aniversariantes
+            const todaysBirthdays = getTodaysBirthdays();
+            
+            // Verificar configurações
+            const configStatus = whatsappConfig.groupLink ? 'Configurado' : 'Não configurado';
+            
+            // Mostrar relatório
+            const report = `
+Relatório de Integração WhatsApp:
+
+- Aniversariantes hoje: ${todaysBirthdays.length}
+- Link do grupo: ${configStatus}
+- Notificações automáticas: ${whatsappConfig.autoBirthdayNotifications ? 'Ativadas' : 'Desativadas'}
+- Total de membros: ${members.length}
+            `;
+            
+            alert(report);
+            console.log('Teste de integração:', report);
+        }
+
+        // Solicitar permissão para notificações
+        function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+        }
+
+        // Integração com o sistema existente
+        function integrateWithExistingSystem() {
+            // Esta função deve ser chamada quando o sistema principal estiver carregado
+            // para substituir os dados de exemplo pelos dados reais
+            
+            console.log('Integrando com sistema NETWORK IN FOCO...');
+            
+            // Exemplo de como integrar:
+            // 1. Substituir o array "members" pelos membros reais
+            // 2. Chamar renderBirthdays() quando os dados forem carregados
+            // 3. Configurar listeners para atualizações
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWhatsAppConfig();
+            renderBirthdays();
+            requestNotificationPermission();
+            
+            // Se as notificações automáticas estão ativadas, agendar verificação
+            if (whatsappConfig.autoBirthdayNotifications) {
+                scheduleBirthdayCheck();
+            }
+            
+            // Configurar auto-save das configurações
+            document.getElementById('autoBirthdayNotifications').addEventListener('change', saveWhatsAppConfig);
+            
+            console.log('Sistema de integração WhatsApp carregado!');
+        });
+
+        // Para integração completa com o sistema existente, adicione:
+        // integrateWithExistingSystem();
+    </script>
+</body>
+</html>
