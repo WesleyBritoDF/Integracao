@@ -2222,6 +2222,352 @@ section {
             }
         }
         
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .prize-preview {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            margin-top: 1rem;
+        }
+        
+        .prize-image {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .prize-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .prize-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .prize-price {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        
+        .giveaway-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .control-group {
+            margin-bottom: 1rem;
+        }
+        
+        .control-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .control-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .control-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .control-checkbox input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .giveaway-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .giveaway-btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .giveaway-btn.primary {
+            background: #ffd700;
+            color: #333;
+        }
+        
+        .giveaway-btn.primary:hover {
+            background: #ffed4a;
+            transform: translateY(-2px);
+        }
+        
+        .giveaway-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .giveaway-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .giveaway-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        /* Área do resultado do sorteio */
+        .giveaway-result {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .giveaway-result.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #ffd700;
+        }
+        
+        .winner-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .winner-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .winner-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #ffd700;
+        }
+        
+        .winner-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .winner-info {
+            flex: 1;
+        }
+        
+        .winner-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .winner-role {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        
+        .prize-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .result-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        /* Histórico de sorteios */
+        .giveaway-history {
+            margin-top: 2rem;
+        }
+        
+        .history-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0 auto;
+            transition: var(--transition);
+        }
+        
+        .history-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .history-content {
+            display: none;
+            margin-top: 1.5rem;
+        }
+        
+        .history-content.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .history-list {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .history-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .history-winner {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .history-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .history-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .history-details {
+            flex: 1;
+        }
+        
+        .history-prize {
+            text-align: right;
+        }
+        
+        .no-history {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 968px) {
+            .giveaway-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .giveaway-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .giveaway-actions {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .giveaway-container {
+                padding: 1.5rem;
+            }
+            
+            .winner-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .result-actions {
+                flex-direction: column;
+            }
+            
+            .history-item {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .history-prize {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2375,9 +2721,128 @@ section {
         </div>
     </section>
 
-    <!-- Main Content -->
-     <!-- Main Content -->
+ <!-- Main Content -->
     <main class="container">
+        <!-- Seção de Sorteio de Brindes -->
+        <section id="sorteio-brindes">
+            <h2 class="section-title">🎁 Sorteio de Brindes</h2>
+            
+            <div class="giveaway-container">
+                <div class="giveaway-header">
+                    <div>
+                        <h3 class="giveaway-title">Sorteio de Brindes da Loja</h3>
+                        <p class="giveaway-subtitle">Sortear brindes para os membros da comunidade</p>
+                    </div>
+                    <div class="giveaway-status" id="giveawayStatus">
+                        Pronto para sortear
+                    </div>
+                </div>
+                
+                <div class="giveaway-content">
+                    <!-- Seleção do Prêmio -->
+                    <div class="giveaway-prize-section">
+                        <h4 class="section-title">🎯 Prêmio do Sorteio</h4>
+                        
+                        <div class="prize-selection">
+                            <select class="prize-select" id="prizeSelect">
+                                <option value="">Selecione um item da loja...</option>
+                                <!-- Itens da loja serão carregados aqui -->
+                            </select>
+                        </div>
+                        
+                        <div class="prize-preview" id="prizePreview">
+                            <p>Selecione um item da loja para visualizar</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Controles do Sorteio -->
+                    <div class="giveaway-controls-section">
+                        <h4 class="section-title">⚙️ Configurações do Sorteio</h4>
+                        
+                        <div class="giveaway-controls">
+                            <div class="control-group">
+                                <label class="control-label">Número de Ganhadores:</label>
+                                <input type="number" class="control-input" id="winnersCount" min="1" max="10" value="1">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label class="control-label">Critérios de Participação:</label>
+                                <div class="control-checkbox">
+                                    <input type="checkbox" id="filterApproved" checked>
+                                    <label for="filterApproved">Apenas membros aprovados</label>
+                                </div>
+                                <div class="control-checkbox">
+                                    <input type="checkbox" id="filterBirthday">
+                                    <label for="filterBirthday">Apenas aniversariantes do mês</label>
+                                </div>
+                                <div class="control-checkbox">
+                                    <input type="checkbox" id="filterSpecificRoles">
+                                    <label for="filterSpecificRoles">Apenas cargos específicos</label>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group" id="specificRolesContainer" style="display: none;">
+                                <label class="control-label">Selecionar Cargos:</label>
+                                <select class="control-input" id="specificRolesSelect" multiple style="height: 100px;">
+                                    <!-- Cargos serão carregados aqui -->
+                                </select>
+                                <small style="opacity: 0.8; font-size: 0.8rem;">Segure Ctrl para selecionar múltiplos cargos</small>
+                            </div>
+                        </div>
+                        
+                        <div class="giveaway-actions">
+                            <button class="giveaway-btn primary" id="startGiveaway">
+                                <span>🎲</span>
+                                Realizar Sorteio
+                            </button>
+                            <button class="giveaway-btn secondary" id="resetGiveaway">
+                                <span>🔄</span>
+                                Reiniciar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Resultado do Sorteio -->
+                <div class="giveaway-result" id="giveawayResult">
+                    <h3 class="result-title">🎉 Parabéns aos Ganhadores!</h3>
+                    
+                    <div id="winnersList">
+                        <!-- Lista de ganhadores será exibida aqui -->
+                    </div>
+                    
+                    <div class="prize-info" id="prizeInfo">
+                        <!-- Informações do prêmio serão exibidas aqui -->
+                    </div>
+                    
+                    <div class="result-actions">
+                        <button class="giveaway-btn primary" id="saveResults">
+                            <span>💾</span>
+                            Salvar Resultado
+                        </button>
+                        <button class="giveaway-btn secondary" id="newGiveaway">
+                            <span>🔄</span>
+                            Novo Sorteio
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Histórico de Sorteios -->
+                <div class="giveaway-history">
+                    <button class="history-toggle" id="historyToggle">
+                        <span>📋</span>
+                        Ver Histórico de Sorteios
+                    </button>
+                    
+                    <div class="history-content" id="historyContent">
+                        <h4 class="section-title">Histórico de Sorteios Realizados</h4>
+                        <div class="history-list" id="historyList">
+                            <!-- Histórico será carregado aqui -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Members Section -->
         <section id="membros">
             <h2 class="section-title">Nossos Membros</h2>
@@ -2825,7 +3290,9 @@ section {
     const birthdayMonthList = document.getElementById('birthdayMonthList');
     const birthdayMonthSubtitle = document.getElementById('birthdayMonthSubtitle');
     const birthdayMonthToggleText = document.getElementById('birthdayMonthToggleText');
-
+    // ========== VARIÁVEIS GLOBAIS PARA O SISTEMA DE SORTEIO ==========
+    let giveawayHistory = [];
+    let currentGiveaway = null;
     // ========== INICIALIZAÇÃO DO SUPABASE ==========
     async function initializeSupabase() {
         try {
@@ -3115,7 +3582,10 @@ section {
                 
                 // Extrai todos os cargos/funções únicos
                 extractAllRoles();
-                
+                // Recarrega os cargos no filtro de sorteio se já estiver inicializado
+                if (document.getElementById('specificRolesSelect')) {
+                    loadRolesForFilter();
+                }
                 if (membersList) {
                     renderMembers();
                 }
@@ -3176,16 +3646,23 @@ section {
     }
 
     async function loadStoreItems() {
-        try {
-            storeItems = await loadData('store_items');
-            console.log('🛍️ Itens da loja carregados:', storeItems);
-            if (storeItemsList) {
-                renderStoreItems();
+            try {
+                storeItems = await loadData('store_items');
+                console.log('🛍️ Itens da loja carregados:', storeItems);
+                
+                if (storeItemsList) {
+                    renderStoreItems();
+                }
+                
+                // Recarrega os itens no sistema de sorteio se já estiver inicializado
+                if (document.getElementById('prizeSelect')) {
+                    loadStoreItemsForGiveaway();
+                }
+                
+            } catch (error) {
+                console.error('Erro ao carregar itens da loja:', error);
             }
-        } catch (error) {
-            console.error('Erro ao carregar itens da loja:', error);
         }
-    }
 
     // ========== NOVAS FUNÇÕES PARA ANIVERSARIANTES DO MÊS ==========
     function getBirthdaysThisMonth() {
@@ -5813,7 +6290,8 @@ section {
                 loadStoreItems(),
                 loadEventChats()
             ]);
-            
+            // Inicializa o sistema de sorteio
+                initializeGiveawaySystem();
             // Atualiza a UI baseado no tipo de usuário
             updateUIForAdmin();
             
@@ -6256,6 +6734,527 @@ async function debugStorage() {
                 clearResults.addEventListener('click', clearFilters);
             }
         }
+    // ========== FUNÇÕES DO SISTEMA DE SORTEIO ==========
+        
+        // Função para inicializar o sistema de sorteio
+        function initializeGiveawaySystem() {
+            console.log('🎁 Inicializando sistema de sorteio...');
+            
+            // Carrega o histórico de sorteios
+            loadGiveawayHistory();
+            
+            // Carrega os itens da loja no select
+            loadStoreItemsForGiveaway();
+            
+            // Carrega os cargos para filtro
+            loadRolesForFilter();
+            
+            // Configura os event listeners
+            setupGiveawayEventListeners();
+            
+            console.log('✅ Sistema de sorteio inicializado');
+        }
+
+        // Função para carregar o histórico de sorteios
+        function loadGiveawayHistory() {
+            giveawayHistory = loadFromLocalStorage('giveaway_history') || [];
+            renderGiveawayHistory();
+        }
+
+        // Função para carregar os itens da loja no select de prêmios
+        function loadStoreItemsForGiveaway() {
+            const prizeSelect = document.getElementById('prizeSelect');
+            
+            if (!prizeSelect) {
+                console.error('❌ Elemento prizeSelect não encontrado');
+                return;
+            }
+            
+            // Limpa opções existentes (exceto a primeira)
+            prizeSelect.innerHTML = '<option value="">Selecione um item da loja...</option>';
+            
+            if (storeItems.length === 0) {
+                prizeSelect.innerHTML += '<option value="" disabled>Nenhum item disponível na loja</option>';
+                return;
+            }
+            
+            // Adiciona os itens da loja
+            storeItems.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = `${item.name} - R$ ${parseFloat(item.price).toFixed(2)}`;
+                option.dataset.item = JSON.stringify(item);
+                prizeSelect.appendChild(option);
+            });
+            
+            console.log(`🛍️ ${storeItems.length} itens da loja carregados para sorteio`);
+        }
+
+        // Função para carregar os cargos para o filtro
+        function loadRolesForFilter() {
+            const rolesSelect = document.getElementById('specificRolesSelect');
+            
+            if (!rolesSelect) return;
+            
+            rolesSelect.innerHTML = '';
+            
+            if (allRoles.length === 0) {
+                rolesSelect.innerHTML = '<option value="" disabled>Nenhum cargo disponível</option>';
+                return;
+            }
+            
+            allRoles.forEach(role => {
+                const option = document.createElement('option');
+                option.value = role;
+                option.textContent = role;
+                rolesSelect.appendChild(option);
+            });
+        }
+
+        // Função para configurar os event listeners do sorteio
+        function setupGiveawayEventListeners() {
+            // Seleção de prêmio
+            const prizeSelect = document.getElementById('prizeSelect');
+            if (prizeSelect) {
+                prizeSelect.addEventListener('change', updatePrizePreview);
+            }
+            
+            // Filtro de cargos específicos
+            const filterSpecificRoles = document.getElementById('filterSpecificRoles');
+            const specificRolesContainer = document.getElementById('specificRolesContainer');
+            
+            if (filterSpecificRoles && specificRolesContainer) {
+                filterSpecificRoles.addEventListener('change', function() {
+                    specificRolesContainer.style.display = this.checked ? 'block' : 'none';
+                });
+            }
+            
+            // Botão de iniciar sorteio
+            const startGiveaway = document.getElementById('startGiveaway');
+            if (startGiveaway) {
+                startGiveaway.addEventListener('click', performGiveaway);
+            }
+            
+            // Botão de reiniciar
+            const resetGiveaway = document.getElementById('resetGiveaway');
+            if (resetGiveaway) {
+                resetGiveaway.addEventListener('click', resetGiveawayForm);
+            }
+            
+            // Botão de salvar resultados
+            const saveResults = document.getElementById('saveResults');
+            if (saveResults) {
+                saveResults.addEventListener('click', saveGiveawayResults);
+            }
+            
+            // Botão de novo sorteio
+            const newGiveaway = document.getElementById('newGiveaway');
+            if (newGiveaway) {
+                newGiveaway.addEventListener('click', resetGiveawayForm);
+            }
+            
+            // Toggle do histórico
+            const historyToggle = document.getElementById('historyToggle');
+            const historyContent = document.getElementById('historyContent');
+            
+            if (historyToggle && historyContent) {
+                historyToggle.addEventListener('click', function() {
+                    historyContent.classList.toggle('show');
+                    this.innerHTML = historyContent.classList.contains('show') ? 
+                        '<span>📋</span> Ocultar Histórico' : 
+                        '<span>📋</span> Ver Histórico de Sorteios';
+                });
+            }
+        }
+
+        // Função para atualizar a prévia do prêmio selecionado
+        function updatePrizePreview() {
+            const prizeSelect = document.getElementById('prizeSelect');
+            const prizePreview = document.getElementById('prizePreview');
+            
+            if (!prizeSelect || !prizePreview) return;
+            
+            const selectedOption = prizeSelect.options[prizeSelect.selectedIndex];
+            
+            if (!selectedOption.value) {
+                prizePreview.innerHTML = '<p>Selecione um item da loja para visualizar</p>';
+                return;
+            }
+            
+            try {
+                const item = JSON.parse(selectedOption.dataset.item);
+                
+                prizePreview.innerHTML = `
+                    <div class="prize-image">
+                        <img src="${item.photo || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'}" 
+                             alt="${item.name}" 
+                             onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                    </div>
+                    <div class="prize-name">${item.name}</div>
+                    <div class="prize-price">R$ ${parseFloat(item.price).toFixed(2)}</div>
+                    <div style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">
+                        ${item.category} • Estoque: ${item.stock || 0}
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Erro ao carregar prévia do prêmio:', error);
+                prizePreview.innerHTML = '<p>Erro ao carregar informações do prêmio</p>';
+            }
+        }
+
+        // Função para realizar o sorteio
+        function performGiveaway() {
+            console.log('🎲 Iniciando sorteio...');
+            
+            // Validações
+            const prizeSelect = document.getElementById('prizeSelect');
+            const winnersCountInput = document.getElementById('winnersCount');
+            
+            if (!prizeSelect.value) {
+                showMessage('❌ Selecione um prêmio para o sorteio!', 'error');
+                return;
+            }
+            
+            const winnersCount = parseInt(winnersCountInput.value) || 1;
+            if (winnersCount < 1) {
+                showMessage('❌ Número de ganhadores deve ser pelo menos 1!', 'error');
+                return;
+            }
+            
+            // Obtém os participantes baseado nos filtros
+            const participants = getGiveawayParticipants();
+            
+            if (participants.length === 0) {
+                showMessage('❌ Nenhum membro encontrado com os critérios selecionados!', 'error');
+                return;
+            }
+            
+            if (participants.length < winnersCount) {
+                showMessage(`❌ Apenas ${participants.length} membros disponíveis para ${winnersCount} ganhadores!`, 'error');
+                return;
+            }
+            
+            // Realiza o sorteio
+            const winners = selectWinners(participants, winnersCount);
+            const prizeItem = JSON.parse(prizeSelect.options[prizeSelect.selectedIndex].dataset.item);
+            
+            // Prepara o resultado
+            currentGiveaway = {
+                id: 'giveaway_' + Date.now(),
+                prize: prizeItem,
+                winners: winners,
+                participantsCount: participants.length,
+                date: new Date().toISOString(),
+                criteria: getSelectedCriteria()
+            };
+            
+            // Exibe o resultado
+            displayGiveawayResult(currentGiveaway);
+            
+            console.log('✅ Sorteio realizado com sucesso!', currentGiveaway);
+        }
+
+        // Função para obter os participantes baseado nos filtros
+        function getGiveawayParticipants() {
+            let participants = [...members]; // Começa com todos os membros aprovados
+            
+            // Filtro: apenas membros aprovados (sempre ativo quando a checkbox está marcada)
+            const filterApproved = document.getElementById('filterApproved');
+            if (filterApproved && filterApproved.checked) {
+                participants = participants.filter(member => member.approved === true);
+            }
+            
+            // Filtro: apenas aniversariantes do mês
+            const filterBirthday = document.getElementById('filterBirthday');
+            if (filterBirthday && filterBirthday.checked) {
+                participants = participants.filter(member => isBirthdayThisMonth(member.birthday));
+            }
+            
+            // Filtro: cargos específicos
+            const filterSpecificRoles = document.getElementById('filterSpecificRoles');
+            const specificRolesSelect = document.getElementById('specificRolesSelect');
+            
+            if (filterSpecificRoles && filterSpecificRoles.checked && specificRolesSelect) {
+                const selectedRoles = Array.from(specificRolesSelect.selectedOptions).map(option => option.value);
+                if (selectedRoles.length > 0) {
+                    participants = participants.filter(member => 
+                        member.role && selectedRoles.includes(member.role.trim())
+                    );
+                }
+            }
+            
+            console.log(`👥 ${participants.length} participantes para o sorteio`);
+            return participants;
+        }
+
+        // Função para verificar se é aniversário no mês atual
+        function isBirthdayThisMonth(birthday) {
+            if (!birthday) return false;
+            
+            const today = new Date();
+            const birthdayDate = new Date(birthday);
+            
+            return today.getMonth() === birthdayDate.getMonth();
+        }
+
+        // Função para selecionar os ganhadores aleatoriamente
+        function selectWinners(participants, winnersCount) {
+            // Embaralha os participantes
+            const shuffled = [...participants].sort(() => 0.5 - Math.random());
+            
+            // Seleciona os ganhadores
+            return shuffled.slice(0, winnersCount);
+        }
+
+        // Função para obter os critérios selecionados
+        function getSelectedCriteria() {
+            const criteria = [];
+            
+            const filterApproved = document.getElementById('filterApproved');
+            if (filterApproved && filterApproved.checked) {
+                criteria.push('Membros aprovados');
+            }
+            
+            const filterBirthday = document.getElementById('filterBirthday');
+            if (filterBirthday && filterBirthday.checked) {
+                criteria.push('Aniversariantes do mês');
+            }
+            
+            const filterSpecificRoles = document.getElementById('filterSpecificRoles');
+            const specificRolesSelect = document.getElementById('specificRolesSelect');
+            
+            if (filterSpecificRoles && filterSpecificRoles.checked && specificRolesSelect) {
+                const selectedRoles = Array.from(specificRolesSelect.selectedOptions).map(option => option.value);
+                if (selectedRoles.length > 0) {
+                    criteria.push(`Cargos: ${selectedRoles.join(', ')}`);
+                }
+            }
+            
+            return criteria.length > 0 ? criteria : ['Todos os membros'];
+        }
+
+        // Função para exibir o resultado do sorteio
+        function displayGiveawayResult(giveaway) {
+            const giveawayResult = document.getElementById('giveawayResult');
+            const winnersList = document.getElementById('winnersList');
+            const prizeInfo = document.getElementById('prizeInfo');
+            const giveawayStatus = document.getElementById('giveawayStatus');
+            
+            if (!giveawayResult || !winnersList || !prizeInfo || !giveawayStatus) return;
+            
+            // Atualiza o status
+            giveawayStatus.textContent = `Sorteio realizado - ${giveaway.winners.length} ganhador(es)`;
+            giveawayStatus.classList.add('pulse');
+            
+            // Exibe a lista de ganhadores
+            winnersList.innerHTML = '';
+            giveaway.winners.forEach(winner => {
+                const winnerCard = document.createElement('div');
+                winnerCard.className = 'winner-card';
+                winnerCard.innerHTML = `
+                    <div class="winner-header">
+                        <div class="winner-avatar">
+                            <img src="${winner.photo || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'}" 
+                                 alt="${winner.name}"
+                                 onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                        </div>
+                        <div class="winner-info">
+                            <div class="winner-name">${winner.name}</div>
+                            <div class="winner-role">${winner.role}</div>
+                            <div style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.3rem;">
+                                ${winner.email}
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity: 0.9; font-size: 0.9rem;">
+                        <strong>Critérios atendidos:</strong> ${getWinnerCriteria(winner, giveaway.criteria).join(', ')}
+                    </div>
+                `;
+                winnersList.appendChild(winnerCard);
+            });
+            
+            // Exibe informações do prêmio
+            prizeInfo.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">Prêmio: ${giveaway.prize.name}</div>
+                    <div>Valor: R$ ${parseFloat(giveaway.prize.price).toFixed(2)} • Categoria: ${giveaway.prize.category}</div>
+                    <div style="margin-top: 0.5rem; opacity: 0.8;">
+                        <strong>Critérios do sorteio:</strong> ${giveaway.criteria.join(', ')}
+                    </div>
+                    <div style="margin-top: 0.3rem; opacity: 0.8;">
+                        <strong>Participantes:</strong> ${giveaway.participantsCount} membros
+                    </div>
+                </div>
+            `;
+            
+            // Mostra o resultado
+            giveawayResult.classList.add('show');
+            
+            // Scroll suave para o resultado
+            giveawayResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Função para obter os critérios atendidos por um ganhador
+        function getWinnerCriteria(winner, criteria) {
+            const winnerCriteria = [];
+            
+            criteria.forEach(criterion => {
+                if (criterion === 'Membros aprovados' && winner.approved) {
+                    winnerCriteria.push('Membro aprovado');
+                } else if (criterion === 'Aniversariantes do mês' && isBirthdayThisMonth(winner.birthday)) {
+                    winnerCriteria.push('Aniversariante do mês');
+                } else if (criterion.includes('Cargos:') && winner.role) {
+                    const roles = criterion.replace('Cargos: ', '').split(', ');
+                    if (roles.includes(winner.role.trim())) {
+                        winnerCriteria.push(`Cargo: ${winner.role}`);
+                    }
+                }
+            });
+            
+            return winnerCriteria.length > 0 ? winnerCriteria : ['Todos os critérios'];
+        }
+
+        // Função para salvar os resultados do sorteio
+        function saveGiveawayResults() {
+            if (!currentGiveaway) {
+                showMessage('❌ Nenhum sorteio para salvar!', 'error');
+                return;
+            }
+            
+            // Adiciona ao histórico
+            giveawayHistory.unshift(currentGiveaway);
+            
+            // Limita o histórico aos 50 últimos sorteios
+            if (giveawayHistory.length > 50) {
+                giveawayHistory = giveawayHistory.slice(0, 50);
+            }
+            
+            // Salva no localStorage
+            saveToLocalStorage('giveaway_history', giveawayHistory);
+            
+            // Atualiza a exibição do histórico
+            renderGiveawayHistory();
+            
+            showMessage('✅ Resultado do sorteio salvo no histórico!', 'success');
+            
+            // Desabilita o botão de salvar para evitar duplicação
+            const saveResults = document.getElementById('saveResults');
+            if (saveResults) {
+                saveResults.disabled = true;
+                saveResults.innerHTML = '<span>✅</span> Resultado Salvo';
+            }
+        }
+
+        // Função para renderizar o histórico de sorteios
+        function renderGiveawayHistory() {
+            const historyList = document.getElementById('historyList');
+            
+            if (!historyList) return;
+            
+            historyList.innerHTML = '';
+            
+            if (giveawayHistory.length === 0) {
+                historyList.innerHTML = '<div class="no-history">Nenhum sorteio realizado ainda</div>';
+                return;
+            }
+            
+            giveawayHistory.forEach(giveaway => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                // Formata a data
+                const giveawayDate = new Date(giveaway.date);
+                const dateString = giveawayDate.toLocaleDateString('pt-BR');
+                const timeString = giveawayDate.toLocaleTimeString('pt-BR', { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+                
+                historyItem.innerHTML = `
+                    <div class="history-winner">
+                        <div class="history-avatar">
+                            <img src="${giveaway.winners[0].photo || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'}" 
+                                 alt="${giveaway.winners[0].name}"
+                                 onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                        </div>
+                        <div class="history-details">
+                            <div style="font-weight: 600;">${giveaway.winners[0].name}</div>
+                            <div style="opacity: 0.8; font-size: 0.9rem;">
+                                ${giveaway.winners.length > 1 ? `+ ${giveaway.winners.length - 1} ganhador(es)` : giveaway.winners[0].role}
+                            </div>
+                            <div style="opacity: 0.7; font-size: 0.8rem;">
+                                ${dateString} às ${timeString}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-prize">
+                        <div style="font-weight: 600;">${giveaway.prize.name}</div>
+                        <div style="opacity: 0.8; font-size: 0.9rem;">
+                            R$ ${parseFloat(giveaway.prize.price).toFixed(2)}
+                        </div>
+                    </div>
+                `;
+                
+                historyList.appendChild(historyItem);
+            });
+        }
+
+        // Função para reiniciar o formulário de sorteio
+        function resetGiveawayForm() {
+            // Limpa a seleção do prêmio
+            const prizeSelect = document.getElementById('prizeSelect');
+            if (prizeSelect) prizeSelect.selectedIndex = 0;
+            
+            // Reseta a prévia do prêmio
+            updatePrizePreview();
+            
+            // Reseta os controles
+            const winnersCount = document.getElementById('winnersCount');
+            if (winnersCount) winnersCount.value = 1;
+            
+            const filterApproved = document.getElementById('filterApproved');
+            if (filterApproved) filterApproved.checked = true;
+            
+            const filterBirthday = document.getElementById('filterBirthday');
+            if (filterBirthday) filterBirthday.checked = false;
+            
+            const filterSpecificRoles = document.getElementById('filterSpecificRoles');
+            if (filterSpecificRoles) filterSpecificRoles.checked = false;
+            
+            const specificRolesContainer = document.getElementById('specificRolesContainer');
+            if (specificRolesContainer) specificRolesContainer.style.display = 'none';
+            
+            const specificRolesSelect = document.getElementById('specificRolesSelect');
+            if (specificRolesSelect) {
+                Array.from(specificRolesSelect.options).forEach(option => {
+                    option.selected = false;
+                });
+            }
+            
+            // Esconde o resultado
+            const giveawayResult = document.getElementById('giveawayResult');
+            if (giveawayResult) giveawayResult.classList.remove('show');
+            
+            // Reseta o status
+            const giveawayStatus = document.getElementById('giveawayStatus');
+            if (giveawayStatus) {
+                giveawayStatus.textContent = 'Pronto para sortear';
+                giveawayStatus.classList.remove('pulse');
+            }
+            
+            // Habilita o botão de salvar
+            const saveResults = document.getElementById('saveResults');
+            if (saveResults) {
+                saveResults.disabled = false;
+                saveResults.innerHTML = '<span>💾</span> Salvar Resultado';
+            }
+            
+            // Limpa o sorteio atual
+            currentGiveaway = null;
+            
+            showMessage('🔄 Formulário de sorteio reiniciado!', 'success');
+        }
+
 // Chame esta função durante a inicialização para verificar
 // debugStorage();
 </script>
