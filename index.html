@@ -2568,6 +2568,92 @@ section {
                 text-align: center;
             }
         }
+ /* Estilos para a seção de resultados públicos do sorteio */
+    .public-giveaway-results {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: var(--radius);
+        padding: 2rem;
+        margin: 2rem 0;
+        color: white;
+        box-shadow: var(--shadow);
+    }
+
+    .public-results-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .public-results-header h3 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+        color: #ffd700;
+    }
+
+    .public-winners-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .public-winner-card {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .winner-badge {
+        background: #ffd700;
+        color: #333;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+
+    .admin-only-section {
+        position: relative;
+    }
+
+    .admin-only-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius);
+        z-index: 10;
+    }
+
+    .admin-only-message {
+        background: white;
+        padding: 2rem;
+        border-radius: var(--radius);
+        text-align: center;
+        box-shadow: var(--shadow);
+        max-width: 400px;
+        margin: 0 1rem;
+    }
+
+    .giveaway-admin-badge {
+        background: var(--admin-color);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-left: 0.5rem;
+    }
+            
     </style>
 </head>
 <body>
@@ -2723,9 +2809,45 @@ section {
 
  <!-- Main Content -->
     <main class="container">
+        <!-- NOVA SEÇÃO: Resultados Públicos dos Sorteios -->
+<section id="resultados-sorteios">
+    <h2 class="section-title">🎊 Resultados dos Sorteios</h2>
+    
+    <div class="public-giveaway-results">
+        <div class="public-results-header">
+            <h3>🏆 Últimos Sorteios Realizados</h3>
+            <p>Confira os ganhadores dos nossos sorteios</p>
+        </div>
+        
+        <div id="publicGiveawayResults">
+            <!-- Os resultados serão carregados aqui dinamicamente -->
+            <div style="text-align: center; padding: 2rem;">
+                <p>Nenhum sorteio realizado ainda.</p>
+                <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">
+                    Fique ligado para os próximos sorteios!
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+        
         <!-- Seção de Sorteio de Brindes -->
-        <section id="sorteio-brindes">
-            <h2 class="section-title">🎁 Sorteio de Brindes</h2>
+       <section id="sorteio-brindes" class="admin-only-section">
+            <!-- Overlay que só aparece para não-administradores -->
+                <div class="admin-only-overlay" id="giveawayAdminOverlay" style="display: none;">
+                    <div class="admin-only-message">
+                        <h3>🔒 Acesso Restrito</h3>
+                        <p>Esta funcionalidade é exclusiva para administradores.</p>
+                        <button class="btn btn-admin" onclick="showAdminLoginModal()" style="margin-top: 1rem;">
+                            🔑 Acessar como Admin
+                        </button>
+                    </div>
+                </div>
+                
+                <h2 class="section-title">
+                    🎁 Sorteio de Brindes 
+                    <span class="giveaway-admin-badge">Apenas Admin</span>
+                </h2>
             
             <div class="giveaway-container">
                 <div class="giveaway-header">
@@ -6166,50 +6288,53 @@ section {
 
     // ========== CONTROLE DE VISIBILIDADE PARA ADMIN ==========
     function updateUIForAdmin() {
-        const isAdmin = isCurrentUserAdmin();
-        const cadastroSection = document.getElementById('cadastro');
-        const cadastroMenu = document.getElementById('cadastroMenu');
-        const publicRegistrationMenu = document.getElementById('publicRegistrationMenu');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const adminAccessBtn = document.querySelector('.admin-access-btn');
-        
-        // Controle da seção de cadastro
-        if (cadastroSection) {
-            cadastroSection.style.display = isAdmin ? 'block' : 'none';
-        }
-        
-        // Controle do menu de cadastro
-        if (cadastroMenu) {
-            cadastroMenu.style.display = isAdmin ? 'list-item' : 'none';
-        }
-        
-        // Controle do menu de cadastro público
-        if (publicRegistrationMenu) {
-            publicRegistrationMenu.style.display = isAdmin ? 'none' : 'list-item';
-        }
-        
-        // Controle dos botões
-        if (logoutBtn) {
-            logoutBtn.style.display = currentUser ? 'inline-block' : 'none';
-        }
-        
-        if (adminAccessBtn) {
-            adminAccessBtn.style.display = currentUser ? 'none' : 'inline-block';
-        }
-        
-        // Recarrega as listas para mostrar/ocultar botões de edição
-        if (membersList) renderMembers();
-        if (eventsContainer) renderEvents();
-        if (partnersList) renderPartners();
-        if (storeItemsList) renderStoreItems();
-        
-        // Mostra membros pendentes se for admin
-        if (isAdmin && pendingMembersList) {
-            renderPendingMembers();
-        }
-        
-        console.log('👤 Interface atualizada para:', isAdmin ? 'Administrador' : currentUser ? 'Usuário Normal' : 'Visitante');
+    const isAdmin = isCurrentUserAdmin();
+    const cadastroSection = document.getElementById('cadastro');
+    const cadastroMenu = document.getElementById('cadastroMenu');
+    const publicRegistrationMenu = document.getElementById('publicRegistrationMenu');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const adminAccessBtn = document.querySelector('.admin-access-btn');
+    
+    // Controle da seção de cadastro
+    if (cadastroSection) {
+        cadastroSection.style.display = isAdmin ? 'block' : 'none';
     }
+    
+    // Controle do menu de cadastro
+    if (cadastroMenu) {
+        cadastroMenu.style.display = isAdmin ? 'list-item' : 'none';
+    }
+    
+    // Controle do menu de cadastro público
+    if (publicRegistrationMenu) {
+        publicRegistrationMenu.style.display = isAdmin ? 'none' : 'list-item';
+    }
+    
+    // Controle dos botões
+    if (logoutBtn) {
+        logoutBtn.style.display = currentUser ? 'inline-block' : 'none';
+    }
+    
+    if (adminAccessBtn) {
+        adminAccessBtn.style.display = currentUser ? 'none' : 'inline-block';
+    }
+    
+    // Atualiza o acesso ao sistema de sorteio
+    updateGiveawayAccess();
+    
+    // Recarrega as listas para mostrar/ocultar botões de edição
+    if (membersList) renderMembers();
+    if (eventsContainer) renderEvents();
+    if (partnersList) renderPartners();
+    if (storeItemsList) renderStoreItems();
+    
+    // Mostra membros pendentes se for admin
+    if (isAdmin && pendingMembersList) {
+        renderPendingMembers();
+    }
+    
+    console.log('👤 Interface atualizada para:', isAdmin ? 'Administrador' : currentUser ? 'Usuário Normal' : 'Visitante');
+}
 
     // Função para logout
     function logout() {
@@ -6279,7 +6404,8 @@ section {
             
             // Sincroniza acessos locais (se houver)
             await syncLocalAccesses();
-            
+            // 🔄 NOVO: Sincroniza sorteios locais
+            await syncLocalGiveaways();
             // Carrega dados
             console.log('📥 Carregando dados...');
             await Promise.all([
@@ -6739,28 +6865,71 @@ async function debugStorage() {
         // Função para inicializar o sistema de sorteio
         function initializeGiveawaySystem() {
             console.log('🎁 Inicializando sistema de sorteio...');
-            
-            // Carrega o histórico de sorteios
-            loadGiveawayHistory();
-            
-            // Carrega os itens da loja no select
-            loadStoreItemsForGiveaway();
-            
-            // Carrega os cargos para filtro
-            loadRolesForFilter();
-            
-            // Configura os event listeners
-            setupGiveawayEventListeners();
+                // Carrega o histórico de sorteios
+                loadGiveawayHistory();
+                
+                // Carrega os itens da loja no select
+                loadStoreItemsForGiveaway();
+                
+                // Carrega os cargos para filtro
+                loadRolesForFilter();
+                
+                // Configura os event listeners
+                setupGiveawayEventListeners();
+                
+                // Atualiza o controle de acesso
+                updateGiveawayAccess();
             
             console.log('✅ Sistema de sorteio inicializado');
         }
 
         // Função para carregar o histórico de sorteios
-        function loadGiveawayHistory() {
+       // Função para carregar o histórico de sorteios (DO SUPABASE)
+async function loadGiveawayHistory() {
+    try {
+        if (isOnline) {
+            // Carrega do Supabase
+            const { data, error } = await supabase
+                .from('giveaways')
+                .select('*')
+                .order('created_at', { ascending: false });
+            
+            if (error) throw error;
+            
+            // Converte o formato do Supabase para o formato interno
+            giveawayHistory = (data || []).map(item => ({
+                id: item.id,
+                prize: {
+                    name: item.prize_name,
+                    price: item.prize_price,
+                    category: item.prize_category,
+                    photo: item.prize_photo
+                },
+                winners: item.winners,
+                participantsCount: item.participants_count,
+                criteria: item.criteria,
+                date: item.created_at
+            }));
+            
+            // Salva localmente como backup
+            saveToLocalStorage('giveaway_history', giveawayHistory);
+            
+            console.log(`✅ ${giveawayHistory.length} sorteios carregados do Supabase`);
+            
+        } else {
+            // Modo offline - carrega do localStorage
             giveawayHistory = loadFromLocalStorage('giveaway_history') || [];
-            renderGiveawayHistory();
+            console.log(`📴 ${giveawayHistory.length} sorteios carregados localmente`);
         }
-
+        
+    } catch (error) {
+        console.error('❌ Erro ao carregar histórico de sorteios:', error);
+        // Fallback para localStorage
+        giveawayHistory = loadFromLocalStorage('giveaway_history') || [];
+    }
+    
+    renderGiveawayHistory();
+}
         // Função para carregar os itens da loja no select de prêmios
         function loadStoreItemsForGiveaway() {
             const prizeSelect = document.getElementById('prizeSelect');
@@ -7115,35 +7284,86 @@ async function debugStorage() {
         }
 
         // Função para salvar os resultados do sorteio
-        function saveGiveawayResults() {
-            if (!currentGiveaway) {
-                showMessage('❌ Nenhum sorteio para salvar!', 'error');
-                return;
-            }
+       // Função para salvar os resultados do sorteio (AGORA NO SUPABASE)
+async function saveGiveawayResults() {
+    if (!currentGiveaway) {
+        showMessage('❌ Nenhum sorteio para salvar!', 'error');
+        return;
+    }
+    
+    try {
+        showLoading('Salvando resultado do sorteio...');
+        
+        // Prepara os dados para salvar
+        const giveawayData = {
+            prize_name: currentGiveaway.prize.name,
+            prize_price: currentGiveaway.prize.price,
+            prize_category: currentGiveaway.prize.category,
+            prize_photo: currentGiveaway.prize.photo,
+            winners: currentGiveaway.winners,
+            participants_count: currentGiveaway.participantsCount,
+            criteria: currentGiveaway.criteria,
+            winners_count: currentGiveaway.winners.length,
+            conducted_by: currentUser?.name || 'Administrador'
+        };
+        
+        let savedGiveaway;
+        
+        if (isOnline) {
+            // Salva no Supabase
+            const { data, error } = await supabase
+                .from('giveaways')
+                .insert([giveawayData])
+                .select();
             
-            // Adiciona ao histórico
-            giveawayHistory.unshift(currentGiveaway);
+            if (error) throw error;
             
-            // Limita o histórico aos 50 últimos sorteios
-            if (giveawayHistory.length > 50) {
-                giveawayHistory = giveawayHistory.slice(0, 50);
-            }
-            
-            // Salva no localStorage
-            saveToLocalStorage('giveaway_history', giveawayHistory);
-            
-            // Atualiza a exibição do histórico
-            renderGiveawayHistory();
-            
-            showMessage('✅ Resultado do sorteio salvo no histórico!', 'success');
-            
-            // Desabilita o botão de salvar para evitar duplicação
-            const saveResults = document.getElementById('saveResults');
-            if (saveResults) {
-                saveResults.disabled = true;
-                saveResults.innerHTML = '<span>✅</span> Resultado Salvo';
-            }
+            savedGiveaway = data[0];
+            console.log('✅ Sorteio salvo no Supabase:', savedGiveaway);
+        } else {
+            // Modo offline - salva localmente
+            savedGiveaway = {
+                ...giveawayData,
+                id: 'giveaway_' + Date.now(),
+                created_at: new Date().toISOString()
+            };
         }
+        
+        // Adiciona ao histórico local também
+        giveawayHistory.unshift({
+            ...currentGiveaway,
+            id: savedGiveaway.id,
+            date: savedGiveaway.created_at
+        });
+        
+        // Limita o histórico local
+        if (giveawayHistory.length > 50) {
+            giveawayHistory = giveawayHistory.slice(0, 50);
+        }
+        
+        // Salva no localStorage
+        saveToLocalStorage('giveaway_history', giveawayHistory);
+        
+        // Atualiza a exibição
+        renderGiveawayHistory();
+        loadPublicGiveawayResults(); // Atualiza os resultados públicos
+        
+        showMessage('✅ Resultado do sorteio salvo com sucesso!', 'success');
+        
+        // Desabilita o botão de salvar
+        const saveResults = document.getElementById('saveResults');
+        if (saveResults) {
+            saveResults.disabled = true;
+            saveResults.innerHTML = '<span>✅</span> Resultado Salvo';
+        }
+        
+    } catch (error) {
+        console.error('❌ Erro ao salvar sorteio:', error);
+        showMessage('Erro ao salvar resultado: ' + error.message, 'error');
+    } finally {
+        hideLoading();
+    }
+}
 
         // Função para renderizar o histórico de sorteios
         function renderGiveawayHistory() {
@@ -7254,7 +7474,281 @@ async function debugStorage() {
             
             showMessage('🔄 Formulário de sorteio reiniciado!', 'success');
         }
+// Função para verificar e controlar o acesso à seção de sorteio
+function updateGiveawayAccess() {
+    const isAdmin = isCurrentUserAdmin();
+    const adminOverlay = document.getElementById('giveawayAdminOverlay');
+    const giveawaySection = document.getElementById('sorteio-brindes');
+    
+    if (adminOverlay && giveawaySection) {
+        if (isAdmin) {
+            adminOverlay.style.display = 'none';
+            giveawaySection.style.position = 'relative';
+        } else {
+            adminOverlay.style.display = 'flex';
+            giveawaySection.style.position = 'relative';
+        }
+    }
+    
+    // Sempre carrega os resultados públicos (para todos)
+    loadPublicGiveawayResults();
+}
+// Função para carregar e exibir resultados públicos
+function loadPublicGiveawayResults() {
+    const publicResultsContainer = document.getElementById('publicGiveawayResults');
+    
+    if (!publicResultsContainer) return;
+    
+    // Sempre tenta carregar do Supabase primeiro
+    await loadGiveawayHistory();
+    
+    const publicHistory = giveawayHistory;
+    
+    if (publicHistory.length === 0) {
+        publicResultsContainer.innerHTML = `
+            <div style="text-align: center; padding: 2rem;">
+                <p>Nenhum sorteio realizado ainda.</p>
+                <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">
+                    Fique ligado para os próximos sorteios!
+                </p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Mostra apenas os últimos 5 sorteios para não sobrecarregar
+    const recentGiveaways = publicHistory.slice(0, 5);
+    
+    publicResultsContainer.innerHTML = '';
+    
+    recentGiveaways.forEach((giveaway, index) => {
+        const giveawayElement = document.createElement('div');
+        const giveawayDate = new Date(giveaway.date);
+        const dateString = giveawayDate.toLocaleDateString('pt-BR');
+        const timeString = giveawayDate.toLocaleTimeString('pt-BR', { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        });
+        
+        giveawayElement.innerHTML = `
+            <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: var(--radius);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h4 style="margin: 0; color: #ffd700;">🎉 Sorteio ${index + 1}</h4>
+                    <span style="opacity: 0.8; font-size: 0.9rem;">${dateString} às ${timeString}</span>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <strong>Prêmio:</strong> ${giveaway.prize.name} 
+                    <span style="opacity: 0.8;">(R$ ${parseFloat(giveaway.prize.price).toFixed(2)})</span>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <strong>Critérios:</strong> ${giveaway.criteria.join(', ')}
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <strong>Participantes:</strong> ${giveaway.participantsCount} membros
+                </div>
+                
+                <div class="public-winners-grid">
+                    ${giveaway.winners.map(winner => `
+                        <div class="public-winner-card">
+                            <div class="winner-badge">🎊 Ganhador</div>
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                                    <img src="${winner.photo || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'}" 
+                                         alt="${winner.name}"
+                                         style="width: 100%; height: 100%; object-fit: cover;"
+                                         onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                                </div>
+                                <div>
+                                    <div style="font-weight: 600; font-size: 1.1rem;">${winner.name}</div>
+                                    <div style="opacity: 0.9; font-size: 0.9rem;">${winner.role}</div>
+                                </div>
+                            </div>
+                            <div style="opacity: 0.8; font-size: 0.9rem;">
+                                ${winner.email}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        
+        publicResultsContainer.appendChild(giveawayElement);
+    });
+    
+    // Se há mais de 5 sorteios, mostra um botão para ver mais
+    if (publicHistory.length > 5) {
+        const viewMoreBtn = document.createElement('button');
+        viewMoreBtn.className = 'btn';
+        viewMoreBtn.style.margin = '1rem auto';
+        viewMoreBtn.style.display = 'block';
+        viewMoreBtn.textContent = `Ver mais ${publicHistory.length - 5} sorteios anteriores`;
+        viewMoreBtn.onclick = () => showAllGiveaways(publicHistory);
+        publicResultsContainer.appendChild(viewMoreBtn);
+    }
+}
 
+// Função para mostrar todos os sorteios em um modal
+function showAllGiveaways(allGiveaways) {
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.background = 'rgba(0,0,0,0.9)';
+    modal.style.zIndex = '10000';
+    modal.style.overflowY = 'auto';
+    modal.style.padding = '2rem';
+    
+    modal.innerHTML = `
+        <div style="max-width: 800px; margin: 0 auto; background: white; border-radius: var(--radius); padding: 2rem; position: relative;">
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+            <h2 style="color: var(--primary-color); margin-bottom: 2rem;">📋 Histórico Completo de Sorteios</h2>
+            <div id="allGiveawaysList"></div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    const listContainer = document.getElementById('allGiveawaysList');
+    allGiveaways.forEach((giveaway, index) => {
+        const giveawayDate = new Date(giveaway.date);
+        const dateString = giveawayDate.toLocaleDateString('pt-BR');
+        const timeString = giveawayDate.toLocaleTimeString('pt-BR', { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        });
+        
+        const giveawayElement = document.createElement('div');
+        giveawayElement.style.marginBottom = '2rem';
+        giveawayElement.style.padding = '1.5rem';
+        giveawayElement.style.border = '1px solid #e2e8f0';
+        giveawayElement.style.borderRadius = 'var(--radius)';
+        
+        giveawayElement.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                <h4 style="margin: 0; color: var(--primary-color);">🎉 Sorteio #${allGiveaways.length - index}</h4>
+                <span style="opacity: 0.8; font-size: 0.9rem;">${dateString} às ${timeString}</span>
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <strong>Prêmio:</strong> ${giveaway.prize.name} 
+                <span style="opacity: 0.8;">(R$ ${parseFloat(giveaway.prize.price).toFixed(2)})</span>
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <strong>Critérios:</strong> ${giveaway.criteria.join(', ')}
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <strong>Participantes:</strong> ${giveaway.participantsCount} membros
+            </div>
+            
+            <div>
+                <strong>Ganhadores:</strong>
+                <div style="margin-top: 0.5rem;">
+                    ${giveaway.winners.map(winner => `
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; padding: 0.5rem; background: #f8f9fa; border-radius: var(--radius);">
+                            <img src="${winner.photo || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'}" 
+                                 alt="${winner.name}"
+                                 style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;"
+                                 onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                            <div>
+                                <div style="font-weight: 600;">${winner.name}</div>
+                                <div style="opacity: 0.8; font-size: 0.9rem;">${winner.role} • ${winner.email}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        
+        listContainer.appendChild(giveawayElement);
+    });
+}
+// Adicione esta função para garantir que os resultados públicos sejam carregados sempre
+function loadPublicGiveawayResultsOnInit() {
+    // Pequeno delay para garantir que o DOM esteja pronto
+    setTimeout(() => {
+        loadPublicGiveawayResults();
+    }, 1000);
+}
+
+// Chame esta função na inicialização
+loadPublicGiveawayResultsOnInit();
+ // Função para sincronizar sorteios locais com o Supabase
+async function syncLocalGiveaways() {
+    if (!isOnline) return;
+    
+    try {
+        const localGiveaways = loadFromLocalStorage('giveaway_history') || [];
+        const onlineGiveaways = await loadGiveawayHistoryFromSupabase();
+        
+        // Encontra sorteios locais que não estão online
+        const localGiveawaysToSync = localGiveaways.filter(local => {
+            return !onlineGiveaways.some(online => online.id === local.id);
+        });
+        
+        if (localGiveawaysToSync.length > 0) {
+            console.log(`🔄 Sincronizando ${localGiveawaysToSync.length} sorteios locais...`);
+            
+            for (const localGiveaway of localGiveawaysToSync) {
+                const giveawayData = {
+                    prize_name: localGiveaway.prize.name,
+                    prize_price: localGiveaway.prize.price,
+                    prize_category: localGiveaway.prize.category,
+                    prize_photo: localGiveaway.prize.photo,
+                    winners: localGiveaway.winners,
+                    participants_count: localGiveaway.participantsCount,
+                    criteria: localGiveaway.criteria,
+                    winners_count: localGiveaway.winners.length,
+                    conducted_by: 'Sistema (Sincronizado)'
+                };
+                
+                const { error } = await supabase
+                    .from('giveaways')
+                    .insert([giveawayData]);
+                
+                if (!error) {
+                    console.log('✅ Sorteio sincronizado:', localGiveaway.id);
+                }
+            }
+            
+            // Recarrega o histórico atualizado
+            await loadGiveawayHistory();
+        }
+        
+    } catch (error) {
+        console.error('❌ Erro ao sincronizar sorteios:', error);
+    }
+}   
+// Função auxiliar para carregar apenas do Supabase
+async function loadGiveawayHistoryFromSupabase() {
+    const { data, error } = await supabase
+        .from('giveaways')
+        .select('*')
+        .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    
+    return (data || []).map(item => ({
+        id: item.id,
+        prize: {
+            name: item.prize_name,
+            price: item.prize_price,
+            category: item.prize_category,
+            photo: item.prize_photo
+        },
+        winners: item.winners,
+        participantsCount: item.participants_count,
+        criteria: item.criteria,
+        date: item.created_at
+    }));
+}    
 // Chame esta função durante a inicialização para verificar
 // debugStorage();
 </script>
