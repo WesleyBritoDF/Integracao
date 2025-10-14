@@ -6403,18 +6403,45 @@
         }
 
         // Função para logout
-        function logout() {
-            currentUser = null;
-            const currentUsers = loadFromLocalStorage('current_users') || [];
-            // Remove o último usuário (mais recente)
-            if (currentUsers.length > 0) {
-                currentUsers.pop();
-                saveToLocalStorage('current_users', currentUsers);
-            }
-            
-            showMessage('👋 Logout realizado com sucesso!', 'success');
-            updateUIForAdmin();
-        }
+        // Função para logout - CORRIGIDA
+function logout() {
+    if (!confirm('Tem certeza que deseja sair da sessão de administrador?')) {
+        return;
+    }
+    
+    console.log('🚪 Executando logout...');
+    
+    // Remove o usuário atual
+    currentUser = null;
+    
+    // Limpa TODOS os usuários do localStorage
+    saveToLocalStorage('current_users', []);
+    
+    // Limpa qualquer sessão administrativa específica
+    localStorage.removeItem('admin_session');
+    
+    console.log('✅ Logout realizado - usuário atual:', currentUser);
+    
+    // Atualiza a UI imediatamente
+    updateUIForAdmin();
+    
+    // Recarrega as listas para remover botões de admin
+    if (membersList) renderMembers();
+    if (eventsContainer) renderEvents();
+    if (partnersList) renderPartners();
+    if (storeItemsList) renderStoreItems();
+    
+    // Esconde a seção de cadastro admin
+    const cadastroSection = document.getElementById('cadastro');
+    if (cadastroSection) {
+        cadastroSection.style.display = 'none';
+    }
+    
+    showMessage('👋 Logout realizado com sucesso! Você saiu da sessão de administrador.', 'success');
+    
+    // Scroll para o topo
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
         // Adicione um botão de logout no header
         function addLogoutButton() {
@@ -6810,7 +6837,8 @@
                 
                 setupEventListeners();
                 setupMobileMenu();
-                
+                  // VERIFICAÇÃO DE SESSÃO - ADICIONE ESTA LINHA
+                checkAndCleanSession();
                 // Registra o acesso atual à página
                 await trackPageAccess();
                 
@@ -7345,28 +7373,63 @@
         }
 
         // Atualizar UI para admin (incluindo botão de sorteio)
-        function updateUIForAdmin() {
-            const isAdmin = isCurrentUserAdmin();
-            const giveawayAccessBtn = document.getElementById('giveawayAccessBtn');
-            const giveawaysMenu = document.getElementById('giveawaysMenu');
-            const giveawaysMenuMobile = document.getElementById('giveawaysMenuMobile');
-            
-            // Controle do botão de sorteio
-            if (giveawayAccessBtn) {
-                giveawayAccessBtn.style.display = isAdmin ? 'inline-block' : 'none';
-            }
-            
-            // Controle do menu de sorteios (sempre visível para todos)
-            if (giveawaysMenu) {
-                giveawaysMenu.style.display = 'list-item';
-            }
-            
-            if (giveawaysMenuMobile) {
-                giveawaysMenuMobile.style.display = 'block';
-            }
-            
-            // Resto da lógica existente...
-        }
+        // Função para atualizar a UI baseado no tipo de usuário - CORRIGIDA
+function updateUIForAdmin() {
+    const isAdmin = isCurrentUserAdmin();
+    const hasUser = !!currentUser;
+    
+    console.log('🔄 Atualizando UI - Admin:', isAdmin, 'Usuário:', hasUser, 'Detalhes:', currentUser);
+    
+    const cadastroSection = document.getElementById('cadastro');
+    const cadastroMenu = document.getElementById('cadastroMenu');
+    const cadastroMenuMobile = document.getElementById('cadastroMenuMobile');
+    const publicRegistrationMenu = document.getElementById('publicRegistrationMenu');
+    const publicRegistrationMenuMobile = document.getElementById('publicRegistrationMenuMobile');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const adminAccessBtn = document.querySelector('.admin-access-btn:not(.logout)');
+    const giveawayAccessBtn = document.getElementById('giveawayAccessBtn');
+    
+    // Controle da seção de cadastro admin
+    if (cadastroSection) {
+        cadastroSection.style.display = isAdmin ? 'block' : 'none';
+        console.log('📝 Seção cadastro admin:', cadastroSection.style.display);
+    }
+    
+    // Controle dos menus de cadastro
+    if (cadastroMenu) {
+        cadastroMenu.style.display = isAdmin ? 'list-item' : 'none';
+    }
+    if (cadastroMenuMobile) {
+        cadastroMenuMobile.style.display = isAdmin ? 'block' : 'none';
+    }
+    
+    // Controle dos menus de cadastro público
+    if (publicRegistrationMenu) {
+        publicRegistrationMenu.style.display = !isAdmin ? 'list-item' : 'none';
+    }
+    if (publicRegistrationMenuMobile) {
+        publicRegistrationMenuMobile.style.display = !isAdmin ? 'block' : 'none';
+    }
+    
+    // Controle dos botões de acesso
+    if (logoutBtn) {
+        logoutBtn.style.display = hasUser ? 'inline-block' : 'none';
+    }
+    
+    if (adminAccessBtn) {
+        adminAccessBtn.style.display = !hasUser ? 'inline-block' : 'none';
+    }
+    
+    // Controle do botão de sorteio
+    if (giveawayAccessBtn) {
+        giveawayAccessBtn.style.display = isAdmin ? 'inline-block' : 'none';
+    }
+    
+    // Atualiza menus mobile
+    updateMobileMenus();
+    
+    console.log('✅ UI atualizada - Logout visível:', logoutBtn?.style.display, 'Admin acesso visível:', adminAccessBtn?.style.display);
+}
 
         // ========== INICIALIZAÇÃO DO SISTEMA DE SORTEIOS ==========
         
@@ -7420,7 +7483,30 @@
                 });
             }
         });
-
+// Função para verificar e limpar sessão ao carregar
+function checkAndCleanSession() {
+    const currentUsers = loadFromLocalStorage('current_users') || [];
+    
+    // Se há usuários salvos mas currentUser está null, sincroniza
+    if (currentUsers.length > 0 && !currentUser) {
+        currentUser = currentUsers[currentUsers.length - 1];
+        console.log('🔄 Sessão recuperada:', currentUser);
+    }
+    
+    // Limpa sessões muito antigas (mais de 24 horas)
+    const now = new Date().getTime();
+    const validUsers = currentUsers.filter(user => {
+        if (user.loginTime) {
+            return (now - user.loginTime) < (24 * 60 * 60 * 1000); // 24 horas
+        }
+        return true; // Mantém usuários sem timestamp
+    });
+    
+    if (validUsers.length < currentUsers.length) {
+        saveToLocalStorage('current_users', validUsers);
+        console.log('🧹 Sessões expiradas removidas');
+    }
+}
         
         // Inicia a aplicação quando o DOM estiver pronto
         if (document.readyState === 'loading') {
