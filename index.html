@@ -46,7 +46,7 @@
             padding: 0 15px;
         }
 
-        /* Header Styles - MELHORADO */
+        /* Header Styles */
         header {
             background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%);
             color: white;
@@ -66,7 +66,6 @@
             position: relative;
         }
 
-        /* Logo Styles - MELHORADO */
         .logo {
             display: flex;
             align-items: center;
@@ -124,7 +123,6 @@
             font-weight: 600;
         }
 
-        /* Header Right Section - NOVO */
         .header-right {
             display: flex;
             align-items: center;
@@ -137,7 +135,6 @@
             align-items: center;
         }
 
-        /* Botões Melhorados */
         .admin-access-btn {
             background: var(--admin-color);
             color: white;
@@ -176,11 +173,7 @@
             white-space: nowrap;
         }
 
-        /* ================================ */
-        /* CORREÇÕES DO MENU - ATUALIZADAS */
-        /* ================================ */
-
-        /* Navegação Desktop - VISÍVEL NO DESKTOP */
+        /* Desktop Navigation */
         .desktop-nav {
             display: flex;
         }
@@ -243,7 +236,7 @@
             transform: scaleX(1);
         }
 
-        /* Menu Mobile - ESCONDIDO NO DESKTOP */
+        /* Mobile Menu */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -308,11 +301,7 @@
             color: #90cdf4;
         }
 
-        /* ================================ */
-        /* MEDIA QUERIES PARA RESPONSIVIDADE */
-        /* ================================ */
-
-        /* Tablet */
+        /* Responsive Design */
         @media (max-width: 1024px) {
             .header-content {
                 padding: 0.8rem 0;
@@ -331,28 +320,23 @@
             }
         }
 
-        /* Mobile - MENU RECOLHIDO */
         @media (max-width: 768px) {
-            /* Esconde menu desktop no mobile */
             .desktop-nav {
                 display: none !important;
             }
             
-            /* Mostra botão hamburguer no mobile */
             .mobile-menu-btn {
                 display: flex !important;
             }
             
-            /* Menu mobile - INICIALMENTE RECOLHIDO */
             .mobile-nav {
-                display: none; /* Começa escondido */
+                display: none;
             }
             
             .mobile-nav.show {
-                display: block; /* Aparece quando ativo */
+                display: block;
             }
             
-            /* Ajustes para mobile */
             .logo {
                 gap: 0.8rem;
             }
@@ -456,7 +440,6 @@
                 font-size: 1.2rem;
             }
             
-            /* Ajuste para cards em mobile */
             .card-image {
                 height: 220px;
             }
@@ -466,7 +449,6 @@
             }
         }
 
-        /* Celular pequeno */
         @media (max-width: 480px) {
             .header-content {
                 padding: 0.6rem 0;
@@ -494,10 +476,7 @@
             }
         }
 
-        /* ================================ */
-        /* ANIMAÇÕES DO MENU MOBILE */
-        /* ================================ */
-
+        /* Mobile Menu Animations */
         .mobile-menu-btn.active span:nth-child(1) {
             transform: rotate(45deg) translate(6px, 6px);
         }
@@ -509,10 +488,6 @@
         .mobile-menu-btn.active span:nth-child(3) {
             transform: rotate(-45deg) translate(6px, -6px);
         }
-
-        /* ================================ */
-        /* ESTILOS RESTANTES (mantidos do original) */
-        /* ================================ */
 
         /* Hero Section */
         .hero {
@@ -722,7 +697,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Para a prévia no formulário - ajuste importante */
         .image-preview {
             width: 150px;
             height: 150px;
@@ -737,7 +711,6 @@
             box-shadow: var(--shadow);
         }
 
-        /* Nova classe para fotos que devem mostrar conteúdo completo */
         .show-full-photo {
             object-fit: contain;
             background-color: #f8f9fa;
@@ -748,7 +721,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 30%; /* Mesmo ajuste para preview */
+            object-position: center 30%;
         }
 
         .image-preview.sponsor,
@@ -847,10 +820,9 @@
             font-size: 0.8rem;
         }
 
-        /*  alternativa para fotos quadradas */
         .card-image.member {
             width: 100%;
-            height: 250px; /* Um pouco mais alto para fotos de perfil */
+            height: 250px;
             overflow: hidden;
             position: relative;
             background-color: #f8f9fa;
@@ -860,7 +832,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top; /* Foca no rosto */
+            object-position: center top;
         }
 
         /* Event Gallery */
@@ -1082,10 +1054,9 @@
             background-color: rgba(47, 133, 90, 1);
         }
 
-        /* CORREÇÕES ESPECÍFICAS PARA FOTOS DE MEMBROS */
         .card-image {
             width: 100%;
-            height: 280px; /* Aumentei a altura para melhor visualização */
+            height: 280px;
             overflow: hidden;
             position: relative;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -1097,25 +1068,22 @@
         .card-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Mantém mas vamos ajustar a posição */
-            object-position: center 30%; /* Foca mais no rosto - ajuste crucial! */
+            object-fit: cover;
+            object-position: center 30%;
             transition: var(--transition);
         }
 
-        /* Para fotos de perfil, ajustamos o object-position */
         .member-photo {
             object-fit: cover;
-            object-position: center 25%; /* Ajuste fino para focar no rosto */
+            object-position: center 25%;
         }
 
-        /*  alternativa: usar contain para mostrar a foto inteira */
         .member-photo-full {
             object-fit: contain;
             background-color: #f8f9fa;
             padding: 10px;
         }
 
-        /* Container de imagem específico para membros */
         .member-photo-container {
             width: 100%;
             height: 100%;
@@ -1733,7 +1701,7 @@
             scroll-margin-top: 100px;
         }
 
-        /* Estilos para o card de aniversariantes do mês - AZUL CLARO */
+        /* Estilos para o card de aniversariantes do mês */
         .birthday-month-card {
             background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
             border: 2px solid #90caf9;
@@ -1898,38 +1866,33 @@
             font-size: 1rem;
         }
 
-        /* ========== AJUSTES ESPECÍFICOS PARA FOTOS DE PARCEIROS ========== */
-        
-        /* Container da imagem do parceiro */
+        /* AJUSTES ESPECÍFICOS PARA FOTOS DE PARCEIROS */
         .card-image.partner {
             width: 100%;
-            height: 200px; /* Altura fixa para padronização */
+            height: 200px;
             overflow: hidden;
             position: relative;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px; /* Espaçamento interno */
+            padding: 15px;
         }
 
-        /* Imagem do parceiro - CENTRALIZADA E AJUSTADA */
         .card-image.partner img {
             width: auto;
             height: auto;
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Mantém a proporção sem cortar */
+            object-fit: contain;
             object-position: center center;
             transition: var(--transition);
         }
 
-        /* Efeito hover suave */
         .card:hover .card-image.partner img {
             transform: scale(1.05);
         }
 
-        /* Preview no formulário de parceiros */
         .image-preview.partner {
             border-radius: var(--radius);
             width: 250px;
@@ -1950,7 +1913,6 @@
             object-position: center center;
         }
 
-        /* Para mobile - ajustes responsivos */
         @media (max-width: 768px) {
             .card-image.partner {
                 height: 180px;
@@ -1975,9 +1937,7 @@
             }
         }
 
-        /* ========== NOVOS ESTILOS PARA O SISTEMA DE FILTRO ========== */
-        
-        /* Container do filtro */
+        /* SISTEMA DE FILTRO */
         .filter-container {
             background-color: white;
             border-radius: var(--radius);
@@ -2205,7 +2165,6 @@
             grid-column: 1/-1;
         }
         
-        /* Responsividade para o filtro */
         @media (max-width: 768px) {
             .filter-options {
                 gap: 0.5rem;
@@ -2224,9 +2183,8 @@
                 width: 100%;
             }
         }
-        /* ========== NOVOS ESTILOS PARA O SISTEMA DE SORTEIO ========== */
-        
-        /* Seção de Sorteios */
+
+        /* SISTEMA DE SORTEIO */
         .giveaways-section {
             margin-top: 3rem;
             padding-top: 2rem;
@@ -2935,6 +2893,7 @@
                 <!-- Sorteios serão carregados dinamicamente aqui -->
             </div>
         </section>
+        
         <!-- Members Section -->
         <section id="membros">
             <h2 class="section-title">Nossos Membros</h2>
@@ -3326,7 +3285,8 @@
             </div>
         </div>
     </footer>
-<!-- Modal de Criação de Sorteio -->
+
+    <!-- Modal de Criação de Sorteio -->
     <div class="giveaway-modal" id="giveawayModal">
         <div class="giveaway-modal-content">
             <button class="giveaway-modal-close" onclick="hideGiveawayModal()">✕</button>
@@ -3440,6 +3400,7 @@
             <button class="giveaway-result-close" onclick="hideGiveawayResultModal()">Fechar</button>
         </div>
     </div>
+
     <script>
         // ========== CONFIGURAÇÃO DO SUPABASE ==========
         const SUPABASE_URL = 'https://jywmvnxurbtziixntuuq.supabase.co';
@@ -3469,15 +3430,21 @@
         let currentPhotoIndex = 0;
 
         // Variáveis para gerenciar fotos existentes
-        let currentEditingEventPhotos = []; // URLs das fotos atuais do evento sendo editado
-        let photosToDelete = []; // URLs das fotos que serão deletadas
+        let currentEditingEventPhotos = [];
+        let photosToDelete = [];
 
         // ========== VARIÁVEIS GLOBAIS PARA O FILTRO ==========
         let memberFilters = {
             roles: [],
             search: ''
         };
-        let allRoles = []; // Array para armazenar todos os cargos/funções únicos
+        let allRoles = [];
+
+        // ========== VARIÁVEIS GLOBAIS PARA SORTEIOS ==========
+        let giveaways = [];
+        let currentGiveawayCriteria = 'all';
+        let selectedRolesForGiveaway = [];
+        let giveawayPrizePhotoFile = null;
 
         // ========== DOM ELEMENTS ==========
         const membersList = document.getElementById('members-list');
@@ -3501,11 +3468,7 @@
         const birthdayMonthList = document.getElementById('birthdayMonthList');
         const birthdayMonthSubtitle = document.getElementById('birthdayMonthSubtitle');
         const birthdayMonthToggleText = document.getElementById('birthdayMonthToggleText');
-        // ========== VARIÁVEIS GLOBAIS PARA SORTEIOS ==========
-        let giveaways = [];
-        let currentGiveawayCriteria = 'all';
-        let selectedRolesForGiveaway = [];
-        let giveawayPrizePhotoFile = null;
+
         // ========== INICIALIZAÇÃO DO SUPABASE ==========
         async function initializeSupabase() {
             try {
@@ -3528,10 +3491,8 @@
             try {
                 console.log('📊 Registrando acesso à página...');
                 
-                // Gera um ID único para este acesso
                 const accessId = 'access_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
                 
-                // Coleta informações do usuário
                 const userAgent = navigator.userAgent;
                 const language = navigator.language;
                 const platform = navigator.platform;
@@ -3548,33 +3509,28 @@
                     page_url: window.location.href,
                     referrer: document.referrer || 'direct',
                     timestamp: new Date().toISOString(),
-                    ip_address: 'unknown' // Em um sistema real, você precisaria de um backend para capturar o IP
+                    ip_address: 'unknown'
                 };
                 
                 if (isOnline) {
-                    // Tenta salvar no Supabase
                     const { data, error } = await supabase
                         .from('page_accesses')
                         .insert([accessData]);
                     
                     if (error) {
                         console.error('❌ Erro ao salvar acesso:', error);
-                        // Salva localmente em caso de erro
                         saveAccessLocally(accessData);
                     } else {
                         console.log('✅ Acesso registrado com sucesso no Supabase');
                     }
                 } else {
-                    // Modo offline - salva localmente
                     saveAccessLocally(accessData);
                 }
                 
-                // Atualiza o contador de acessos
                 await updateAccessCounter();
                 
             } catch (error) {
                 console.error('❌ Erro no tracking de acesso:', error);
-                // Mesmo com erro, tenta atualizar o contador
                 await updateAccessCounter();
             }
         }
@@ -3595,7 +3551,6 @@
                 let totalAccesses = 0;
                 
                 if (isOnline) {
-                    // Busca o total de acessos do Supabase
                     const { data, error, count } = await supabase
                         .from('page_accesses')
                         .select('*', { count: 'exact', head: true });
@@ -3603,19 +3558,16 @@
                     if (!error && count !== null) {
                         totalAccesses = count;
                     } else {
-                        // Fallback para dados locais em caso de erro
                         const localAccesses = loadFromLocalStorage('page_accesses') || [];
                         totalAccesses = localAccesses.length;
                     }
                 } else {
-                    // Modo offline - usa apenas dados locais
                     const localAccesses = loadFromLocalStorage('page_accesses') || [];
                     totalAccesses = localAccesses.length;
                 }
                 
                 pageAccessCount = totalAccesses;
                 
-                // Atualiza a interface
                 if (accessCount) {
                     accessCount.textContent = totalAccesses.toLocaleString('pt-BR');
                 }
@@ -3645,7 +3597,6 @@
                             .insert([access]);
                         
                         if (!error) {
-                            // Remove do localStorage após sincronização bem-sucedida
                             const updatedAccesses = localAccesses.filter(a => a.id !== access.id);
                             saveToLocalStorage('page_accesses', updatedAccesses);
                         }
@@ -3675,7 +3626,6 @@
                                 })
                             };
                         } else {
-                            // Para contagem
                             return Promise.resolve({ 
                                 data: null, 
                                 error: null,
@@ -3782,19 +3732,16 @@
             }
         }
 
-        // Atualiza a função loadMembers para incluir a extração de cargos
         async function loadMembers() {
             try {
                 const allMembers = await loadData('members');
                 
-                // Separar membros aprovados e pendentes
                 members = allMembers.filter(member => member.approved === true);
                 pendingMembers = allMembers.filter(member => member.approved !== true);
                 
                 console.log('📋 Membros carregados:', members.length);
                 console.log('⏳ Membros pendentes:', pendingMembers.length);
                 
-                // Extrai todos os cargos/funções únicos
                 extractAllRoles();
                 
                 if (membersList) {
@@ -3805,11 +3752,9 @@
                     renderPendingMembers();
                 }
                 
-                // Verificar aniversariantes do dia e do mês
                 checkBirthdays();
                 renderBirthdayMonthCard();
                 
-                // Inicializa o sistema de filtro após carregar os membros
                 initializeFilterSystem();
                 
             } catch (error) {
@@ -3856,7 +3801,7 @@
         // ========== NOVAS FUNÇÕES PARA ANIVERSARIANTES DO MÊS ==========
         function getBirthdaysThisMonth() {
             const today = new Date();
-            const currentMonth = today.getMonth() + 1; // Mês atual (1-12)
+            const currentMonth = today.getMonth() + 1;
             
             return members.filter(member => {
                 if (!member.birthday) return false;
@@ -3866,7 +3811,6 @@
                 
                 return birthdayMonth === currentMonth;
             }).sort((a, b) => {
-                // Ordenar por dia do mês
                 const dayA = new Date(a.birthday).getDate();
                 const dayB = new Date(b.birthday).getDate();
                 return dayA - dayB;
@@ -3881,7 +3825,6 @@
                 return;
             }
             
-            // Atualizar subtítulo com informações do mês
             const today = new Date();
             const monthNames = [
                 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -3891,7 +3834,6 @@
             
             birthdayMonthSubtitle.textContent = `${birthdayMembers.length} aniversariante(s) em ${currentMonthName}`;
             
-            // Renderizar lista de aniversariantes
             birthdayMonthList.innerHTML = '';
             
             birthdayMembers.forEach(member => {
@@ -3920,13 +3862,10 @@
                 birthdayMonthList.appendChild(birthdayItem);
             });
             
-            // Mostrar o card
             birthdayMonthCard.style.display = 'block';
             
-            // Verificar se deve recolher automaticamente após alguns dias
             const todayDay = today.getDate();
             if (todayDay > 10) {
-                // Se já passou do dia 10, recolher automaticamente
                 const storedState = localStorage.getItem('birthdayMonthCardExpanded');
                 if (storedState !== 'true') {
                     toggleBirthdayMonthCard(false);
@@ -3939,7 +3878,6 @@
             const toggleText = document.getElementById('birthdayMonthToggleText');
             
             if (show !== undefined) {
-                // Forçar estado específico
                 if (show) {
                     list.style.display = 'block';
                     toggleText.textContent = 'Recolher';
@@ -3950,7 +3888,6 @@
                     localStorage.setItem('birthdayMonthCardExpanded', 'false');
                 }
             } else {
-                // Alternar estado atual
                 if (list.style.display === 'none') {
                     list.style.display = 'block';
                     toggleText.textContent = 'Recolher';
@@ -3980,12 +3917,10 @@
                     });
                 }
 
-                // Verificar se o arquivo é uma imagem válida
                 if (!file.type.startsWith('image/')) {
                     throw new Error('Por favor, selecione um arquivo de imagem válido (JPG, PNG, GIF, WebP)');
                 }
 
-                // Verificar tamanho do arquivo (máx 5MB)
                 if (file.size > 5 * 1024 * 1024) {
                     throw new Error('A imagem deve ter menos de 5MB');
                 }
@@ -4000,8 +3935,8 @@
                 const sanitizeFileName = (name) => {
                     return name
                         .normalize('NFD')
-                        .replace(/[\u0300-\u036f]/g, '') // Remove acentos
-                        .replace(/[^a-zA-Z0-9._-]/g, '_') // Substitui caracteres especiais por _
+                        .replace(/[\u0300-\u036f]/g, '')
+                        .replace(/[^a-zA-Z0-9._-]/g, '_')
                         .toLowerCase();
                 };
                 
@@ -4010,7 +3945,6 @@
                 
                 console.log(`🔄 Fazendo upload do arquivo: ${uniqueFileName} para bucket: ${bucket}`);
                 
-                // Fazer upload para o Supabase Storage
                 const { data, error } = await supabase.storage
                     .from(bucket)
                     .upload(uniqueFileName, file, {
@@ -4021,7 +3955,6 @@
                 if (error) {
                     console.error('❌ Erro no upload:', error);
                     
-                    // Tentar com nome mais simples
                     const fallbackName = `image_${Date.now()}.${fileExt}`;
                     console.log(`🔄 Tentando fallback: ${fallbackName}`);
                     
@@ -4052,7 +3985,6 @@
 
                 console.log('✅ Upload concluído, obtendo URL pública...');
 
-                // Obter URL pública
                 const { data: { publicUrl } } = supabase.storage
                     .from(bucket)
                     .getPublicUrl(uniqueFileName);
@@ -4070,9 +4002,7 @@
             try {
                 console.log(`📤 Iniciando upload de ${files.length} imagens para o bucket: ${bucket}`);
                 
-                // Função para sanitizar nomes de arquivo
                 const sanitizeFileName = (fileName) => {
-                    // Remove acentos e caracteres especiais
                     return fileName
                         .normalize('NFD')
                         .replace(/[\u0300-\u036f]/g, '')
@@ -4081,7 +4011,6 @@
                 };
                 
                 const uploadPromises = Array.from(files).map(async (file, index) => {
-                    // Validação do arquivo
                     if (!file.type.startsWith('image/')) {
                         console.warn(`Arquivo não é uma imagem: ${file.name}`);
                         return null;
@@ -4100,7 +4029,6 @@
                         return null;
                     }
                     
-                    // Sanitiza o nome base e gera nome único
                     const sanitizedBaseName = sanitizeFileName(baseName);
                     const uniqueFileName = `${sanitizedBaseName}_${Date.now()}_${index}.${fileExt}`;
                     
@@ -4118,7 +4046,6 @@
                     }
 
                     try {
-                        // Upload para o Supabase Storage
                         const { data, error } = await supabase.storage
                             .from(bucket)
                             .upload(uniqueFileName, file, {
@@ -4128,7 +4055,6 @@
 
                         if (error) {
                             console.error(`❌ Erro no upload da imagem ${index + 1}:`, error);
-                            // Tenta com nome mais simples em caso de erro
                             const fallbackName = `event_${Date.now()}_${index}.${fileExt}`;
                             console.log(`🔄 Tentando fallback: ${fallbackName}`);
                             
@@ -4154,7 +4080,6 @@
 
                         console.log(`✅ Upload concluído para ${uniqueFileName}`);
 
-                        // Obtém URL pública
                         const { data: { publicUrl } } = supabase.storage
                             .from(bucket)
                             .getPublicUrl(uniqueFileName);
@@ -4178,14 +4103,13 @@
             }
         }
 
-        // ========== FUNÇÃO SAVE DATA CORRIGIDA PARA EVENTOS ==========
+        // ========== FUNÇÃO SAVE DATA CORRIGIDA ==========
         async function saveData(table, formData, imageFiles, buttonId, editingId = null) {
             try {
                 showButtonLoading(document.getElementById(buttonId), true);
                 
                 console.log(`💾 Salvando dados para ${table}`, formData);
                 
-                // Função para sanitizar nomes de arquivo
                 const sanitizeFileName = (name) => {
                     return name
                         .normalize('NFD')
@@ -4194,13 +4118,11 @@
                         .toLowerCase();
                 };
 
-                // PROCESSAMENTO ESPECÍFICO PARA EVENTOS
                 if (table === 'events') {
                     console.log('🎯 Processando evento - Fotos novas:', eventPhotosFiles.length, 'Fotos existentes:', currentEditingEventPhotos?.length || 0);
                     
                     let uploadedPhotoUrls = [];
                     
-                    // Upload de novas fotos se houver
                     if (eventPhotosFiles && eventPhotosFiles.length > 0) {
                         console.log(`📤 Fazendo upload de ${eventPhotosFiles.length} novas fotos`);
                         
@@ -4215,20 +4137,16 @@
                         }
                     }
                     
-                    // Prepara os dados para salvar
                     const dataToSave = { ...formData };
                     
-                    // Combina fotos existentes (que não foram removidas) com novas fotos
                     let allPhotoUrls = [];
                     
-                    // Mantém fotos existentes que não foram marcadas para deleção
                     if (currentEditingEventPhotos && currentEditingEventPhotos.length > 0) {
                         const keptPhotos = currentEditingEventPhotos.filter(photo => !photosToDelete.includes(photo));
                         allPhotoUrls = [...keptPhotos];
                         console.log('📸 Fotos existentes mantidas:', keptPhotos.length);
                     }
                     
-                    // Adiciona novas fotos
                     if (uploadedPhotoUrls.length > 0) {
                         allPhotoUrls = [...allPhotoUrls, ...uploadedPhotoUrls];
                         console.log('🆕 Novas fotos adicionadas:', uploadedPhotoUrls.length);
@@ -4237,13 +4155,11 @@
                     dataToSave.photos = allPhotoUrls;
                     console.log('✅ Todas as fotos do evento:', allPhotoUrls.length);
                     
-                    // Deleta fotos antigas do storage se estiver online
                     if (isOnline && photosToDelete.length > 0) {
                         console.log('🗑️ Deletando fotos do storage:', photosToDelete.length);
                         
                         for (const photoUrl of photosToDelete) {
                             try {
-                                // Extrai o nome do arquivo da URL
                                 const fileName = photoUrl.split('/').pop();
                                 if (fileName) {
                                     const { error } = await supabase.storage
@@ -4261,11 +4177,9 @@
                             }
                         }
                         
-                        // Limpa a lista de fotos para deletar após a exclusão
                         photosToDelete = [];
                     }
                     
-                    // Salva no banco de dados
                     if (isOnline) {
                         let result;
                         
@@ -4294,26 +4208,22 @@
                             }
                         } catch (dbError) {
                             console.error(`❌ Erro no banco de dados:`, dbError);
-                            // Fallback para salvar localmente
                             await saveDataLocally(table, dataToSave, editingId);
                             showMessage(`${getEntityName(table)} salvo localmente (erro no banco).`, 'warning');
                             return true;
                         }
                         
-                        // Recarrega os dados
                         await loadEvents();
                         
                         showMessage(`${getEntityName(table)} ${editingId ? 'atualizado' : 'cadastrado'} com sucesso! ${allPhotoUrls.length} foto(s) salva(s).`, 'success');
                         return true;
                         
                     } else {
-                        // Modo offline
                         await saveDataLocally(table, dataToSave, editingId);
                         return true;
                     }
                     
                 } else {
-                    // PROCESSAMENTO ORIGINAL PARA OUTRAS TABELAS (Membros, Parceiros, Loja)
                     let imageUrl = null;
                     
                     if (imageFiles) {
@@ -4323,7 +4233,6 @@
                         
                         console.log(`📤 Processando imagem para ${table}`);
                         
-                        // Define o bucket correto
                         let bucketName;
                         switch(table) {
                             case 'members': bucketName = 'members-photos'; break;
@@ -4344,10 +4253,8 @@
                         }
                     }
                     
-                    // Prepara os dados para salvar
                     const dataToSave = { ...formData };
                     
-                    // Adiciona a URL da imagem aos dados
                     if (imageUrl) {
                         if (table === 'members') {
                             dataToSave.photo = imageUrl;
@@ -4358,7 +4265,6 @@
                         }
                     }
                     
-                    // Para membros públicos, define approved como false
                     if (table === 'members' && buttonId === 'publicMemberSubmitBtn') {
                         dataToSave.approved = false;
                     }
@@ -4394,7 +4300,6 @@
                             return true;
                         }
                         
-                        // Recarrega os dados específicos
                         switch(table) {
                             case 'users': 
                                 await loadUsers(); 
@@ -4430,7 +4335,6 @@
             }
         }
 
-        // Função auxiliar para salvar dados localmente
         async function saveDataLocally(table, dataToSave, editingId = null) {
             try {
                 if (editingId) {
@@ -4460,13 +4364,12 @@
                     console.log(`✅ ${getEntityName(table)} criado localmente:`, dataToSave.id);
                 }
                 
-                // Atualiza a interface
                 switch(table) {
                     case 'users': 
                         users = loadFromLocalStorage('users'); 
                         break;
                     case 'members': 
-                        await loadMembers(); // Usa await para garantir o recarregamento
+                        await loadMembers();
                         break;
                     case 'events': 
                         events = loadFromLocalStorage('events'); 
@@ -4490,7 +4393,6 @@
             }
         }
 
-        // Função para obter o nome da entidade
         function getEntityName(table) {
             const names = {
                 'users': 'Usuário',
@@ -4503,13 +4405,10 @@
         }
 
         // ========== FUNÇÕES DE RENDERIZAÇÃO ==========
-        // Atualiza a função renderMembers para usar a função de filtro
         function renderMembers() {
-            // Se houver filtros ativos, usa a função de renderização filtrada
             if (memberFilters.roles.length > 0 || memberFilters.search.trim() !== '') {
                 renderFilteredMembers();
             } else {
-                // Senão, usa a renderização normal
                 if (!membersList) {
                     console.error('❌ Elemento members-list não encontrado');
                     return;
@@ -4563,7 +4462,6 @@
             }
         }
 
-        // Função auxiliar para mensagens informativas rápidas
         function showMessage(message, type = 'success', duration = 3000) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `global-notification ${type}`;
@@ -4586,7 +4484,6 @@
             }, duration);
         }
 
-        // Nova função para alternar entre visualizações
         function togglePhotoView(imgElement) {
             if (imgElement.classList.contains('show-full-photo')) {
                 imgElement.classList.remove('show-full-photo');
@@ -4601,7 +4498,6 @@
             }
         }
 
-        // Função melhorada para lidar com erro em fotos
         function handleMemberPhotoError(img) {
             console.log('❌ Erro ao carregar foto do membro, usando placeholder...');
             img.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60';
@@ -4660,7 +4556,6 @@
                 return;
             }
             
-            // Separar eventos por data
             const now = new Date();
             const upcomingEvents = [];
             const pastEvents = [];
@@ -4676,10 +4571,8 @@
             
             console.log(`📅 Eventos futuros: ${upcomingEvents.length}, Eventos Realizados: ${pastEvents.length}`);
             
-            // Limpar container
             eventsContainer.innerHTML = '';
             
-            // Renderizar eventos futuros
             if (upcomingEvents.length > 0) {
                 const upcomingSection = document.createElement('div');
                 upcomingSection.className = 'events-section';
@@ -4708,7 +4601,6 @@
                 eventsContainer.appendChild(noUpcomingSection);
             }
             
-            // Renderizar eventos passados
             if (pastEvents.length > 0) {
                 const pastSection = document.createElement('div');
                 pastSection.className = 'events-section';
@@ -4726,7 +4618,6 @@
                 );
             }
             
-            // Configura os chats após renderizar os eventos
             events.forEach(event => {
                 setupEventChat(event.id);
             });
@@ -4739,7 +4630,6 @@
             const photos = event.photos || [];
             const mainPhoto = photos.length > 0 ? photos[0] : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60';
             
-            // Verificar se é um evento passado
             const now = new Date();
             const eventDateTime = new Date(`${event.event_date}T${event.event_time}`);
             const isPastEvent = eventDateTime < now;
@@ -4861,7 +4751,6 @@
             });
         }
 
-        // Função para lidar com erro no carregamento de logos de parceiros
         function handlePartnerLogoError(img) {
             console.log('❌ Erro ao carregar logo do parceiro, usando placeholder...');
             img.src = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60';
@@ -4978,7 +4867,7 @@
                 
                 switch(table) {
                     case 'members': 
-                        await loadMembers(); // Recarrega para atualizar membros pendentes também
+                        await loadMembers();
                         break;
                     case 'events': renderEvents(); break;
                     case 'partners': renderPartners(); break;
@@ -5012,7 +4901,6 @@
                 document.getElementById('memberLinkedin').value = member.linkedin || '';
                 document.getElementById('memberBio').value = member.bio || '';
 
-                // Atualiza o preview da foto
                 const preview = document.getElementById('memberPhotoPreview');
                 if (member.photo) {
                     preview.innerHTML = `<img src="${member.photo}" alt="Preview">`;
@@ -5051,13 +4939,11 @@
                 document.getElementById('eventLocation').value = event.location || '';
                 document.getElementById('eventDescription').value = event.description || '';
 
-                // Salvar as fotos atuais do evento para gerenciamento
                 currentEditingEventId = eventId;
-                currentEditingEventPhotos = event.photos || []; // Array com as URLs atuais
+                currentEditingEventPhotos = event.photos || [];
                 
                 console.log('📸 Fotos atuais do evento:', currentEditingEventPhotos);
 
-                // Atualizar o preview com as fotos existentes
                 const preview = document.getElementById('eventPhotosPreview');
                 preview.innerHTML = '';
                 
@@ -5075,7 +4961,6 @@
                         preview.appendChild(photoItem);
                     });
                     
-                    // Atualizar o texto da área de upload
                     const uploadArea = document.getElementById('eventPhotosUploadArea');
                     uploadArea.innerHTML = `
                         <p>📷 ${currentEditingEventPhotos.length} foto(s) existente(s)</p>
@@ -5083,7 +4968,6 @@
                     `;
                 }
 
-                //Resetar o array de novos arquivos
                 eventPhotosFiles = [];
 
                 document.getElementById('eventSubmitText').textContent = 'Atualizar Evento';
@@ -5118,7 +5002,6 @@
                 document.getElementById('partnerContact').value = partner.contact || '';
                 document.getElementById('partnerDescription').value = partner.description || '';
 
-                // Atualiza o preview do logo
                 const preview = document.getElementById('partnerLogoPreview');
                 if (partner.logo) {
                     preview.innerHTML = `<img src="${partner.logo}" alt="Preview">`;
@@ -5158,7 +5041,6 @@
                 document.getElementById('storeItemDescription').value = item.description || '';
                 document.getElementById('storeItemLink').value = item.link || '';
 
-                // Atualiza o preview da foto
                 const preview = document.getElementById('storeItemPhotoPreview');
                 if (item.photo) {
                     preview.innerHTML = `<img src="${item.photo}" alt="Preview">`;
@@ -5273,7 +5155,6 @@
             
             birthdayReminder.classList.add('show');
             
-            // Fecha automaticamente após 10 segundos
             setTimeout(() => {
                 closeBirthdayReminder();
             }, 10000);
@@ -5351,7 +5232,7 @@
                         role: document.getElementById('memberRole')?.value || '',
                         linkedin: document.getElementById('memberLinkedin')?.value || '',
                         bio: document.getElementById('memberBio')?.value || '',
-                        approved: true // Admin cadastra diretamente aprovado
+                        approved: true
                     };
                     
                     if (!memberData.name || !memberData.email || !memberData.role || !memberData.birthday) {
@@ -5382,7 +5263,7 @@
                         role: document.getElementById('publicMemberRole')?.value || '',
                         bio: document.getElementById('publicMemberBio')?.value || '',
                         linkedin: document.getElementById('publicMemberLinkedin')?.value || '',
-                        approved: false // Cadastro público fica pendente
+                        approved: false
                     };
                     
                     if (!memberData.name || !memberData.email || !memberData.role || !memberData.phone || !memberData.birthday) {
@@ -5416,7 +5297,6 @@
                         return;
                     }
                     
-                    // Verifica se há fotos selecionadas
                     const totalPhotos = eventPhotosFiles.length + (currentEditingEventPhotos?.length || 0);
                     if (totalPhotos === 0) {
                         if (!confirm('Nenhuma foto foi selecionada para o evento. Deseja continuar sem fotos?')) {
@@ -5426,7 +5306,6 @@
                     
                     console.log(`📝 Salvando evento "${eventData.title}" com ${eventPhotosFiles.length} fotos novas e ${currentEditingEventPhotos ? currentEditingEventPhotos.length : 0} fotos existentes`);
                     
-                    // CORREÇÃO: Passa null para imageFiles pois as fotos são gerenciadas pelas variáveis globais
                     const success = await saveData('events', eventData, null, 'eventSubmitBtn', currentEditingEventId);
                     
                     if (success) {
@@ -5552,7 +5431,6 @@
                         return;
                     }
                     
-                    // Se não há usuário atual, cria um
                     if (!currentUser) {
                         currentUser = {
                             id: 'admin_' + Date.now(),
@@ -5571,7 +5449,6 @@
                     showMessage('✅ Acesso de administrador concedido! Agora você pode cadastrar e gerenciar itens.', 'success');
                     hideAdminLoginModal();
                     
-                    // Atualiza a UI para mostrar as seções de admin
                     updateUIForAdmin();
                 });
             }
@@ -5590,13 +5467,11 @@
                 anchor.addEventListener('click', function(e) {
                     const targetId = this.getAttribute('href');
                     
-                    // Verifica se é um link interno (#)
                     if (targetId && targetId.startsWith('#')) {
                         e.preventDefault();
                         const targetElement = document.querySelector(targetId);
                         
                         if (targetElement) {
-                            // Calcula a posição considerando o header fixo
                             const headerHeight = document.querySelector('header').offsetHeight;
                             const targetPosition = targetElement.offsetTop - headerHeight - 20;
                             
@@ -5605,11 +5480,9 @@
                                 behavior: 'smooth'
                             });
                             
-                            // Fecha o menu mobile se estiver aberto
                             const navUl = document.querySelector('nav ul');
                             if (navUl) navUl.classList.remove('show');
                             
-                            // Atualiza a classe active no menu
                             document.querySelectorAll('nav a').forEach(link => {
                                 link.classList.remove('active');
                             });
@@ -5658,12 +5531,10 @@
             
             if (!input || !preview || !uploadArea) return;
             
-            // Clique na área de upload
             uploadArea.addEventListener('click', () => {
                 input.click();
             });
             
-            // Arrastar e soltar
             uploadArea.addEventListener('dragover', (e) => {
                 e.preventDefault();
                 uploadArea.style.borderColor = '#3498db';
@@ -5684,7 +5555,6 @@
                 handleMultiplePhotos(files);
             });
             
-            // Mudança no input de arquivo
             input.addEventListener('change', (e) => {
                 handleMultiplePhotos(e.target.files);
             });
@@ -5705,7 +5575,6 @@
                     return;
                 }
                 
-                // Limita a 20 fotos no total (existentes + novas)
                 const filesToProcess = validFiles.slice(0, 20);
                 const totalAfterAdd = (currentEditingEventPhotos?.length || 0) + eventPhotosFiles.length + filesToProcess.length;
                 
@@ -5714,10 +5583,8 @@
                     return;
                 }
                 
-                // Adiciona ao array global de novas fotos
                 eventPhotosFiles = [...eventPhotosFiles, ...filesToProcess];
                 
-                // Atualiza o preview combinando fotos existentes e novas
                 updateExistingPhotosPreview();
                 
                 showMessage(`${filesToProcess.length} nova(s) foto(s) adicionada(s)! Total: ${(currentEditingEventPhotos?.length || 0) + eventPhotosFiles.length}`, 'success');
@@ -5727,46 +5594,36 @@
                 }
             }
             
-            // Inicializa o texto da área de upload
             uploadArea.innerHTML = `
                 <p>📷 Clique aqui ou arraste fotos para adicionar</p>
                 <p style="font-size: 0.8rem; color: #666;">Você pode selecionar várias fotos (máx. 20)</p>
             `;
         }
 
-        // Função para remover foto NOVA do evento (ainda não salva)
         function removeEventPhoto(index) {
             eventPhotosFiles.splice(index, 1);
-            
-            // Atualiza o preview combinado
             updateExistingPhotosPreview();
         }
 
-        // Função para remover fotos existentes durante a edição
         function removeExistingEventPhoto(index) {
             if (!confirm('Tem certeza que deseja remover esta foto do evento?')) {
                 return;
             }
             
-            // Adiciona a foto à lista de fotos para deletar
             const photoUrl = currentEditingEventPhotos[index];
             photosToDelete.push(photoUrl);
             
-            // Remove a foto do array atual
             currentEditingEventPhotos.splice(index, 1);
             
-            // Atualiza o preview
             updateExistingPhotosPreview();
             
             showMessage('Foto marcada para remoção. Clique em "Atualizar Evento" para confirmar.', 'warning');
         }
 
-        // Função para atualizar o preview das fotos existentes
         function updateExistingPhotosPreview() {
             const preview = document.getElementById('eventPhotosPreview');
             preview.innerHTML = '';
             
-            // Mostra fotos existentes
             currentEditingEventPhotos.forEach((photoUrl, index) => {
                 const photoItem = document.createElement('div');
                 photoItem.className = 'photo-preview-item';
@@ -5780,7 +5637,6 @@
                 preview.appendChild(photoItem);
             });
             
-            // Mostra novas fotos adicionadas
             eventPhotosFiles.forEach((file, index) => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -5798,7 +5654,6 @@
                 reader.readAsDataURL(file);
             });
             
-            // Atualiza o texto da área de upload
             const uploadArea = document.getElementById('eventPhotosUploadArea');
             const totalPhotos = currentEditingEventPhotos.length + eventPhotosFiles.length;
             
@@ -5837,13 +5692,11 @@
                     submitText = document.getElementById('eventSubmitText');
                     photosPreview = document.getElementById('eventPhotosPreview');
                     
-                    //CRUCIAL: Resetar todas as variáveis de fotos de evento
                     eventPhotosFiles = [];
                     currentEditingEventId = null;
                     currentEditingEventPhotos = [];
                     photosToDelete = [];
                     
-                    // Reseta a área de upload
                     const uploadArea = document.getElementById('eventPhotosUploadArea');
                     if (uploadArea) {
                         uploadArea.innerHTML = `
@@ -5852,7 +5705,6 @@
                         `;
                     }
                     
-                    // Limpa o preview
                     if (photosPreview) {
                         photosPreview.innerHTML = '';
                     }
@@ -5896,7 +5748,6 @@
             currentEditingPartnerId = null;
             currentEditingStoreItemId = null;
             
-            // Limpa as variáveis de fotos de evento
             currentEditingEventPhotos = [];
             photosToDelete = [];
             eventPhotosFiles = [];
@@ -5912,18 +5763,14 @@
             try {
                 console.log('🗑️ Iniciando exclusão do membro ID:', memberId);
                 
-                // Procura o membro em TODAS as listas possíveis
                 let member = null;
                 
-                // 1. Procura nos membros aprovados
                 member = members.find(m => m.id === memberId);
                 
-                // 2. Se não encontrou, procura nos membros pendentes
                 if (!member) {
                     member = pendingMembers.find(m => m.id === memberId);
                 }
                 
-                // 3. Se ainda não encontrou, procura no localStorage completo
                 if (!member) {
                     const allMembers = loadFromLocalStorage('members') || [];
                     member = allMembers.find(m => m.id === memberId);
@@ -5941,7 +5788,6 @@
 
                 showLoading('Excluindo membro...');
 
-                // Remove do banco de dados (se online)
                 if (isOnline) {
                     console.log('🌐 Removendo do Supabase...');
                     const { error } = await supabase
@@ -5951,32 +5797,27 @@
                     
                     if (error) {
                         console.error('❌ Erro do Supabase:', error);
-                        // Continua mesmo com erro, para tentar remover localmente
                     } else {
                         console.log('✅ Removido do Supabase');
                     }
                 }
 
-                // Remove do localStorage - abordagem mais direta
                 console.log('💾 Atualizando localStorage...');
                 const allMembers = loadFromLocalStorage('members') || [];
                 const updatedMembers = allMembers.filter(m => m.id !== memberId);
                 saveToLocalStorage('members', updatedMembers);
                 console.log('✅ localStorage atualizado - removidos:', allMembers.length - updatedMembers.length, 'membros');
 
-                // Atualiza as variáveis globais
                 members = members.filter(m => m.id !== memberId);
                 pendingMembers = pendingMembers.filter(m => m.id !== memberId);
                 
                 console.log('🔄 Atualizando interface...');
                 
-                // Atualiza a interface
                 renderMembers();
                 if (isCurrentUserAdmin()) {
                     renderPendingMembers();
                 }
                 
-                // Atualiza o card de aniversariantes do mês
                 renderBirthdayMonthCard();
                 
                 console.log('✅ Exclusão concluída com sucesso');
@@ -6021,7 +5862,6 @@
                     if (error) throw error;
                 }
                 
-                // Atualiza localmente
                 const allMembers = loadFromLocalStorage('members') || [];
                 const memberIndex = allMembers.findIndex(m => m.id == memberId);
                 if (memberIndex !== -1) {
@@ -6033,7 +5873,6 @@
                     saveToLocalStorage('members', allMembers);
                 }
                 
-                // Recarrega os membros
                 await loadMembers();
                 
                 showMessage('✅ Membro aprovado com sucesso!', 'success');
@@ -6060,10 +5899,8 @@
             showPhoto();
             galleryModal.style.display = 'flex';
             
-            // Previne scroll do body quando a galeria está aberta
             document.body.style.overflow = 'hidden';
             
-            // Foco no botão fechar para melhor acessibilidade
             setTimeout(() => {
                 const closeBtn = document.querySelector('.gallery-modal-close');
                 if (closeBtn) closeBtn.focus();
@@ -6077,7 +5914,6 @@
             currentGalleryEvent = null;
             currentPhotoIndex = 0;
             
-            // Restaura scroll do body
             document.body.style.overflow = '';
             
             console.log('🚪 Galeria fechada');
@@ -6097,7 +5933,6 @@
                 </div>
             `;
             
-            // Adiciona loading state
             galleryImage.onload = function() {
                 this.style.opacity = '1';
             };
@@ -6121,20 +5956,17 @@
             showPhoto();
         }
 
-        // Fechar galeria com ESC ou clicando fora da imagem
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && galleryModal.style.display === 'flex') {
                 closeGallery();
             }
             
-            // Navegação com teclado
             if (galleryModal.style.display === 'flex') {
                 if (e.key === 'ArrowRight') nextPhoto();
                 if (e.key === 'ArrowLeft') prevPhoto();
             }
         });
 
-        // Fechar ao clicar no fundo escuro (fora da imagem)
         galleryModal.addEventListener('click', (e) => {
             if (e.target === galleryModal) {
                 closeGallery();
@@ -6332,7 +6164,6 @@
             });
         }
 
-        // Função para lidar com erro de carregamento da logo
         function handleLogoError(img) {
             console.log('❌ Erro ao carregar logo principal, tentando alternativas...');
             
@@ -6358,92 +6189,87 @@
         // ========== CONTROLE DE VISIBILIDADE PARA ADMIN ==========
         function updateUIForAdmin() {
             const isAdmin = isCurrentUserAdmin();
+            const hasUser = !!currentUser;
+            
+            console.log('🔄 Atualizando UI - Admin:', isAdmin, 'Usuário:', hasUser, 'Detalhes:', currentUser);
+            
             const cadastroSection = document.getElementById('cadastro');
             const cadastroMenu = document.getElementById('cadastroMenu');
+            const cadastroMenuMobile = document.getElementById('cadastroMenuMobile');
             const publicRegistrationMenu = document.getElementById('publicRegistrationMenu');
+            const publicRegistrationMenuMobile = document.getElementById('publicRegistrationMenuMobile');
             const logoutBtn = document.getElementById('logoutBtn');
-            const adminAccessBtn = document.querySelector('.admin-access-btn');
+            const adminAccessBtn = document.querySelector('.admin-access-btn:not(.logout)');
+            const giveawayAccessBtn = document.getElementById('giveawayAccessBtn');
             
-            // Controle da seção de cadastro
             if (cadastroSection) {
                 cadastroSection.style.display = isAdmin ? 'block' : 'none';
+                console.log('📝 Seção cadastro admin:', cadastroSection.style.display);
             }
             
-            // Controle do menu de cadastro
             if (cadastroMenu) {
                 cadastroMenu.style.display = isAdmin ? 'list-item' : 'none';
             }
-            
-            // Controle do menu de cadastro público
-            if (publicRegistrationMenu) {
-                publicRegistrationMenu.style.display = isAdmin ? 'none' : 'list-item';
+            if (cadastroMenuMobile) {
+                cadastroMenuMobile.style.display = isAdmin ? 'block' : 'none';
             }
             
-            // Controle dos botões
+            if (publicRegistrationMenu) {
+                publicRegistrationMenu.style.display = !isAdmin ? 'list-item' : 'none';
+            }
+            if (publicRegistrationMenuMobile) {
+                publicRegistrationMenuMobile.style.display = !isAdmin ? 'block' : 'none';
+            }
+            
             if (logoutBtn) {
-                logoutBtn.style.display = currentUser ? 'inline-block' : 'none';
+                logoutBtn.style.display = hasUser ? 'inline-block' : 'none';
             }
             
             if (adminAccessBtn) {
-                adminAccessBtn.style.display = currentUser ? 'none' : 'inline-block';
+                adminAccessBtn.style.display = !hasUser ? 'inline-block' : 'none';
             }
             
-            // Recarrega as listas para mostrar/ocultar botões de edição
+            if (giveawayAccessBtn) {
+                giveawayAccessBtn.style.display = isAdmin ? 'inline-block' : 'none';
+            }
+            
+            updateMobileMenus();
+            
+            console.log('✅ UI atualizada - Logout visível:', logoutBtn?.style.display, 'Admin acesso visível:', adminAccessBtn?.style.display);
+        }
+
+        function logout() {
+            if (!confirm('Tem certeza que deseja sair da sessão de administrador?')) {
+                return;
+            }
+            
+            console.log('🚪 Executando logout...');
+            
+            currentUser = null;
+            
+            saveToLocalStorage('current_users', []);
+            
+            localStorage.removeItem('admin_session');
+            
+            console.log('✅ Logout realizado - usuário atual:', currentUser);
+            
+            updateUIForAdmin();
+            
             if (membersList) renderMembers();
             if (eventsContainer) renderEvents();
             if (partnersList) renderPartners();
             if (storeItemsList) renderStoreItems();
             
-            // Mostra membros pendentes se for admin
-            if (isAdmin && pendingMembersList) {
-                renderPendingMembers();
+            const cadastroSection = document.getElementById('cadastro');
+            if (cadastroSection) {
+                cadastroSection.style.display = 'none';
             }
             
-            console.log('👤 Interface atualizada para:', isAdmin ? 'Administrador' : currentUser ? 'Usuário Normal' : 'Visitante');
+            showMessage('👋 Logout realizado com sucesso! Você saiu da sessão de administrador.', 'success');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Função para logout
-        // Função para logout - CORRIGIDA
-function logout() {
-    if (!confirm('Tem certeza que deseja sair da sessão de administrador?')) {
-        return;
-    }
-    
-    console.log('🚪 Executando logout...');
-    
-    // Remove o usuário atual
-    currentUser = null;
-    
-    // Limpa TODOS os usuários do localStorage
-    saveToLocalStorage('current_users', []);
-    
-    // Limpa qualquer sessão administrativa específica
-    localStorage.removeItem('admin_session');
-    
-    console.log('✅ Logout realizado - usuário atual:', currentUser);
-    
-    // Atualiza a UI imediatamente
-    updateUIForAdmin();
-    
-    // Recarrega as listas para remover botões de admin
-    if (membersList) renderMembers();
-    if (eventsContainer) renderEvents();
-    if (partnersList) renderPartners();
-    if (storeItemsList) renderStoreItems();
-    
-    // Esconde a seção de cadastro admin
-    const cadastroSection = document.getElementById('cadastro');
-    if (cadastroSection) {
-        cadastroSection.style.display = 'none';
-    }
-    
-    showMessage('👋 Logout realizado com sucesso! Você saiu da sessão de administrador.', 'success');
-    
-    // Scroll para o topo
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-        // Adicione um botão de logout no header
         function addLogoutButton() {
             const headerContent = document.querySelector('.header-content');
             const adminAccessBtn = document.querySelector('.admin-access-btn');
@@ -6463,47 +6289,38 @@ function logout() {
 
         // ========== FUNÇÕES DO SISTEMA DE FILTRO ==========
         
-        // Função para extrair todos os cargos/funções únicos dos membros
         function extractAllRoles() {
             const rolesSet = new Set();
             
-            // Adiciona cargos dos membros aprovados
             members.forEach(member => {
                 if (member.role && member.role.trim() !== '') {
                     rolesSet.add(member.role.trim());
                 }
             });
             
-            // Adiciona cargos dos membros pendentes
             pendingMembers.forEach(member => {
                 if (member.role && member.role.trim() !== '') {
                     rolesSet.add(member.role.trim());
                 }
             });
             
-            // Converte Set para Array e ordena alfabeticamente
             allRoles = Array.from(rolesSet).sort((a, b) => a.localeCompare(b));
             
             console.log('📊 Cargos/funções extraídos:', allRoles);
         }
 
-        // Função para inicializar o sistema de filtro
         function initializeFilterSystem() {
             console.log('🎛️ Inicializando sistema de filtro...');
             
-            // Renderiza as opções de filtro
             renderFilterOptions();
             
-            // Configura os event listeners
             setupFilterEventListeners();
             
-            // Aplica filtros iniciais (se houver algum salvo)
             applyFilters();
             
             console.log('✅ Sistema de filtro inicializado');
         }
 
-        // Função para renderizar as opções de filtro
         function renderFilterOptions() {
             const filterOptions = document.getElementById('filterOptions');
             
@@ -6533,16 +6350,13 @@ function logout() {
             });
         }
 
-        // Função para alternar uma opção de filtro
         function toggleFilterOption(role, element) {
             const index = memberFilters.roles.indexOf(role);
             
             if (index === -1) {
-                // Adiciona ao filtro
                 memberFilters.roles.push(role);
                 element.classList.add('active');
             } else {
-                // Remove do filtro
                 memberFilters.roles.splice(index, 1);
                 element.classList.remove('active');
             }
@@ -6550,37 +6364,30 @@ function logout() {
             console.log('🎯 Filtros ativos:', memberFilters.roles);
         }
 
-        // Função para aplicar os filtros
         function applyFilters() {
             console.log('🔍 Aplicando filtros:', memberFilters);
             
-            // Atualiza a lista de membros com os filtros aplicados
             renderFilteredMembers();
             
-            // Atualiza a exibição dos resultados do filtro
             updateFilterResults();
             
-            // Fecha o painel de filtros (opcional)
             const filterContent = document.getElementById('filterContent');
             if (filterContent) {
                 filterContent.classList.remove('show');
             }
         }
 
-        // Função para renderizar membros filtrados
         function renderFilteredMembers() {
             if (!membersList) return;
             
-            let filteredMembers = [...members]; // Começa com todos os membros aprovados
+            let filteredMembers = [...members];
             
-            // Aplica filtro por cargos/funções
             if (memberFilters.roles.length > 0) {
                 filteredMembers = filteredMembers.filter(member => 
                     member.role && memberFilters.roles.includes(member.role.trim())
                 );
             }
             
-            // Aplica filtro de busca
             if (memberFilters.search.trim() !== '') {
                 const searchTerm = memberFilters.search.toLowerCase().trim();
                 filteredMembers = filteredMembers.filter(member => 
@@ -6592,7 +6399,6 @@ function logout() {
             
             console.log(`👥 Membros após filtro: ${filteredMembers.length} de ${members.length}`);
             
-            // Renderiza os membros filtrados
             renderList(membersList, filteredMembers, 'members', (member) => {
                 const canEdit = isCurrentUserAdmin();
                 const isBirthday = checkIfBirthdayToday(member.birthday);
@@ -6637,7 +6443,6 @@ function logout() {
                 `;
             });
             
-            // Mostra mensagem se não houver resultados
             if (filteredMembers.length === 0) {
                 const noResults = document.createElement('div');
                 noResults.className = 'no-results';
@@ -6650,7 +6455,6 @@ function logout() {
             }
         }
 
-        // Função para atualizar a exibição dos resultados do filtro
         function updateFilterResults() {
             const filterResults = document.getElementById('filterResults');
             const filterResultsCount = document.getElementById('filterResultsCount');
@@ -6658,16 +6462,13 @@ function logout() {
             
             if (!filterResults || !filterResultsCount || !filterResultsTags) return;
             
-            // Conta membros filtrados
             const filteredCount = getFilteredMembersCount();
             const totalCount = members.length;
             
             filterResultsCount.textContent = `${filteredCount} de ${totalCount} membros`;
             
-            // Atualiza as tags dos filtros aplicados
             filterResultsTags.innerHTML = '';
             
-            // Tags para cargos/funções
             memberFilters.roles.forEach(role => {
                 const tag = document.createElement('div');
                 tag.className = 'filter-tag';
@@ -6678,7 +6479,6 @@ function logout() {
                 filterResultsTags.appendChild(tag);
             });
             
-            // Tag para busca
             if (memberFilters.search.trim() !== '') {
                 const tag = document.createElement('div');
                 tag.className = 'filter-tag';
@@ -6689,7 +6489,6 @@ function logout() {
                 filterResultsTags.appendChild(tag);
             }
             
-            // Mostra ou esconde a seção de resultados
             if (memberFilters.roles.length > 0 || memberFilters.search.trim() !== '') {
                 filterResults.classList.add('show');
             } else {
@@ -6697,18 +6496,15 @@ function logout() {
             }
         }
 
-        // Função para obter a contagem de membros filtrados
         function getFilteredMembersCount() {
             let filteredMembers = [...members];
             
-            // Aplica filtro por cargos/funções
             if (memberFilters.roles.length > 0) {
                 filteredMembers = filteredMembers.filter(member => 
                     member.role && memberFilters.roles.includes(member.role.trim())
                 );
             }
             
-            // Aplica filtro de busca
             if (memberFilters.search.trim() !== '') {
                 const searchTerm = memberFilters.search.toLowerCase().trim();
                 filteredMembers = filteredMembers.filter(member => 
@@ -6721,19 +6517,16 @@ function logout() {
             return filteredMembers.length;
         }
 
-        // Função para remover uma tag de filtro específica
         function removeFilterTag(role) {
             const index = memberFilters.roles.indexOf(role);
             if (index !== -1) {
                 memberFilters.roles.splice(index, 1);
                 
-                // Atualiza a interface
                 renderFilterOptions();
                 applyFilters();
             }
         }
 
-        // Função para remover o filtro de busca
         function removeSearchFilter() {
             memberFilters.search = '';
             const searchInput = document.getElementById('filterSearch');
@@ -6743,14 +6536,12 @@ function logout() {
             applyFilters();
         }
 
-        // Função para limpar todos os filtros
         function clearFilters() {
             memberFilters = {
                 roles: [],
                 search: ''
             };
             
-            // Atualiza a interface
             renderFilterOptions();
             
             const searchInput = document.getElementById('filterSearch');
@@ -6761,9 +6552,7 @@ function logout() {
             applyFilters();
         }
 
-        // Função para configurar os event listeners do filtro
         function setupFilterEventListeners() {
-            // Toggle do painel de filtros
             const filterToggle = document.getElementById('filterToggle');
             const filterContent = document.getElementById('filterContent');
             
@@ -6773,7 +6562,6 @@ function logout() {
                 });
             }
             
-            // Busca em tempo real
             const filterSearch = document.getElementById('filterSearch');
             if (filterSearch) {
                 let searchTimeout;
@@ -6784,150 +6572,28 @@ function logout() {
                     searchTimeout = setTimeout(() => {
                         memberFilters.search = e.target.value;
                         applyFilters();
-                    }, 500); // Debounce de 500ms
+                    }, 500);
                 });
             }
             
-            // Botão aplicar filtros
             const applyFilter = document.getElementById('applyFilter');
             if (applyFilter) {
                 applyFilter.addEventListener('click', applyFilters);
             }
             
-            // Botão limpar filtros
             const clearFilter = document.getElementById('clearFilter');
             if (clearFilter) {
                 clearFilter.addEventListener('click', clearFilters);
             }
             
-            // Botão limpar resultados
             const clearResults = document.getElementById('clearResults');
             if (clearResults) {
                 clearResults.addEventListener('click', clearFilters);
             }
         }
 
-        // ========== INICIALIZAÇÃO ==========
-        async function initializeApp() {
-            try {
-                console.log('🚀 Inicializando aplicação...');
-                
-                // Inicializa variáveis globais
-                users = [];
-                members = [];
-                pendingMembers = [];
-                events = [];
-                partners = [];
-                storeItems = [];
-                eventChats = {};
-                eventPhotosFiles = [];
-                pageAccessCount = 0;
-                
-                const supabaseInitialized = await initializeSupabase();
-                
-                // Verifica se há usuário atual salvo
-                const currentUsers = loadFromLocalStorage('current_users') || [];
-                if (currentUsers.length > 0) {
-                    currentUser = currentUsers[currentUsers.length - 1];
-                    console.log('👤 Usuário atual recuperado:', currentUser);
-                }
-                
-                // Adiciona botão de logout
-                addLogoutButton();
-                
-                setupEventListeners();
-                setupMobileMenu();
-                  // VERIFICAÇÃO DE SESSÃO - ADICIONE ESTA LINHA
-                checkAndCleanSession();
-                // Registra o acesso atual à página
-                await trackPageAccess();
-                
-                // Sincroniza acessos locais (se houver)
-                await syncLocalAccesses();
-                
-                // Carrega dados
-                console.log('📥 Carregando dados...');
-                await Promise.all([
-                    loadUsers(),
-                    loadMembers(),
-                    loadEvents(),
-                    loadPartners(),
-                    loadStoreItems(),
-                    loadEventChats(),
-                    loadGiveaways() 
-                ]);
-                
-                // Atualiza a UI baseado no tipo de usuário
-                updateUIForAdmin();
-                
-                // Verifica o estado do card de aniversariantes do mês
-                const storedState = localStorage.getItem('birthdayMonthCardExpanded');
-                if (storedState === 'false') {
-                    toggleBirthdayMonthCard(false);
-                }
-                
-                if (supabaseInitialized) {
-                    showMessage('✅ Sistema conectado!', 'success');
-                } else {
-                    showMessage('📴 Sistema em modo offline. Dados salvos localmente.', 'warning');
-                }
-                
-                console.log('🎉 Aplicação inicializada com sucesso!');
-                
-            } catch (error) {
-                console.error('❌ Erro na inicialização do app:', error);
-                showMessage('❌ Erro ao inicializar o sistema: ' + error.message, 'error');
-            }
-        }
-
-        // Menu Mobile Functionality
-        function setupMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileNav = document.getElementById('mobileNav');
-            
-            if (mobileMenuBtn && mobileNav) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mobileMenuBtn.classList.toggle('active');
-                    mobileNav.classList.toggle('show');
-                    
-                    // Fecha o menu ao clicar em um link
-                    const mobileLinks = mobileNav.querySelectorAll('a');
-                    mobileLinks.forEach(link => {
-                        link.addEventListener('click', () => {
-                            mobileMenuBtn.classList.remove('active');
-                            mobileNav.classList.remove('show');
-                        });
-                    });
-                });
-                
-                // Fecha o menu ao clicar fora
-                document.addEventListener('click', function(event) {
-                    if (!mobileMenuBtn.contains(event.target) && !mobileNav.contains(event.target)) {
-                        mobileMenuBtn.classList.remove('active');
-                        mobileNav.classList.remove('show');
-                    }
-                });
-            }
-        }
-
-        // Atualiza os menus mobile quando o usuário faz login/logout
-        function updateMobileMenus() {
-            const isAdmin = isCurrentUserAdmin();
-            const cadastroMenuMobile = document.getElementById('cadastroMenuMobile');
-            const publicRegistrationMenuMobile = document.getElementById('publicRegistrationMenuMobile');
-            
-            if (cadastroMenuMobile) {
-                cadastroMenuMobile.style.display = isAdmin ? 'block' : 'none';
-            }
-            
-            if (publicRegistrationMenuMobile) {
-                publicRegistrationMenuMobile.style.display = isAdmin ? 'none' : 'block';
-            }
-        }
-    
         // ========== FUNÇÕES DO SISTEMA DE SORTEIOS ==========
         
-        // Carregar sorteios do banco de dados
         async function loadGiveaways() {
             try {
                 giveaways = await loadData('giveaways');
@@ -6938,7 +6604,6 @@ function logout() {
             }
         }
 
-        // Renderizar sorteios na interface
         function renderGiveaways() {
             const giveawaysList = document.getElementById('giveaways-list');
             if (!giveawaysList) return;
@@ -6959,11 +6624,9 @@ function logout() {
                 const giveawayCard = document.createElement('div');
                 giveawayCard.className = 'giveaway-card';
                 
-                // Formatar data
                 const giveawayDate = new Date(giveaway.created_at);
                 const formattedDate = giveawayDate.toLocaleDateString('pt-BR');
                 
-                // Processar vencedores
                 const winners = giveaway.winners || [];
                 
                 giveawayCard.innerHTML = `
@@ -7026,7 +6689,6 @@ function logout() {
             });
         }
 
-        // Mostrar modal de criação de sorteio
         function showGiveawayModal() {
             if (!isCurrentUserAdmin()) {
                 showMessage('Apenas administradores podem criar sorteios.', 'error');
@@ -7036,19 +6698,15 @@ function logout() {
             const modal = document.getElementById('giveawayModal');
             modal.style.display = 'flex';
             
-            // Carregar opções de cargo para critérios
             loadRoleCriteriaOptions();
             
-            // Atualizar prévia em tempo real
             setupGiveawayPreview();
         }
 
-        // Ocultar modal de criação de sorteio
         function hideGiveawayModal() {
             const modal = document.getElementById('giveawayModal');
             modal.style.display = 'none';
             
-            // Resetar formulário
             document.getElementById('giveawayForm').reset();
             document.getElementById('giveawayPrizePhotoPreview').innerHTML = '<div class="placeholder">Foto do Prêmio</div>';
             document.getElementById('previewPrizeImage').innerHTML = '<div class="placeholder">Imagem do prêmio aparecerá aqui</div>';
@@ -7057,7 +6715,6 @@ function logout() {
             selectedRolesForGiveaway = [];
             giveawayPrizePhotoFile = null;
             
-            // Resetar critérios
             document.querySelectorAll('.criteria-option').forEach(option => {
                 option.classList.remove('active');
             });
@@ -7065,7 +6722,6 @@ function logout() {
             document.getElementById('roleCriteria').style.display = 'none';
         }
 
-        // Carregar opções de cargo para critérios de sorteio
         function loadRoleCriteriaOptions() {
             const roleOptionsContainer = document.getElementById('roleCriteriaOptions');
             if (!roleOptionsContainer) return;
@@ -7097,9 +6753,7 @@ function logout() {
             });
         }
 
-        // Configurar prévia do sorteio em tempo real
         function setupGiveawayPreview() {
-            // Atualizar critérios
             document.querySelectorAll('.criteria-option').forEach(option => {
                 option.addEventListener('click', () => {
                     document.querySelectorAll('.criteria-option').forEach(opt => {
@@ -7109,7 +6763,6 @@ function logout() {
                     
                     currentGiveawayCriteria = option.dataset.criteria;
                     
-                    // Mostrar/ocultar seleção de cargos
                     if (currentGiveawayCriteria === 'role') {
                         document.getElementById('roleCriteria').style.display = 'block';
                     } else {
@@ -7121,17 +6774,14 @@ function logout() {
                 });
             });
             
-            // Atualizar prévia quando os campos mudam
             document.getElementById('giveawayPrizeName').addEventListener('input', updateGiveawayPreview);
             document.getElementById('giveawayPrizePrice').addEventListener('input', updateGiveawayPreview);
             document.getElementById('giveawayPrizeCategory').addEventListener('input', updateGiveawayPreview);
             document.getElementById('giveawayWinnersCount').addEventListener('input', updateGiveawayPreview);
             
-            // Configurar upload de imagem
             setupGiveawayImageUpload();
         }
 
-        // Atualizar prévia do sorteio
         function updateGiveawayPreview() {
             const prizeName = document.getElementById('giveawayPrizeName').value || 'Nome do Prêmio';
             const prizePrice = document.getElementById('giveawayPrizePrice').value || '0';
@@ -7142,7 +6792,6 @@ function logout() {
             document.getElementById('previewPrizeDetails').textContent = 
                 `Valor: R$ ${parseFloat(prizePrice).toFixed(2)} | Categoria: ${prizeCategory} | Ganhadores: ${winnersCount}`;
             
-            // Atualizar critérios na prévia
             let criteriaText = '';
             switch(currentGiveawayCriteria) {
                 case 'all':
@@ -7161,7 +6810,6 @@ function logout() {
             document.getElementById('previewCriteria').textContent = `Critério: ${criteriaText}`;
         }
 
-        // Configurar upload de imagem do prêmio
         function setupGiveawayImageUpload() {
             const input = document.getElementById('giveawayPrizePhoto');
             const preview = document.getElementById('giveawayPrizePhotoPreview');
@@ -7197,12 +6845,10 @@ function logout() {
             });
         }
 
-        // Realizar sorteio
         async function conductGiveaway(formData) {
             try {
                 console.log('🎲 Iniciando sorteio...');
                 
-                // Determinar participantes baseado nos critérios
                 let participants = [];
                 
                 switch(currentGiveawayCriteria) {
@@ -7210,8 +6856,7 @@ function logout() {
                         participants = [...members];
                         break;
                     case 'active':
-                        // Aqui você pode definir sua própria lógica para "ativos"
-                        participants = [...members]; // Por enquanto, todos são considerados ativos
+                        participants = [...members];
                         break;
                     case 'role':
                         participants = members.filter(member => 
@@ -7229,10 +6874,8 @@ function logout() {
                     throw new Error(`Apenas ${participants.length} participantes disponíveis para ${winnersCount} ganhadores.`);
                 }
                 
-                // Embaralhar participantes
                 const shuffledParticipants = [...participants].sort(() => Math.random() - 0.5);
                 
-                // Selecionar ganhadores
                 const winners = shuffledParticipants.slice(0, winnersCount).map(winner => ({
                     id: winner.id,
                     name: winner.name,
@@ -7242,7 +6885,6 @@ function logout() {
                 
                 console.log('🏆 Ganhadores selecionados:', winners);
                 
-                // Preparar dados do sorteio
                 const giveawayData = {
                     prize_name: formData.prize_name,
                     prize_price: parseFloat(formData.prize_price),
@@ -7257,7 +6899,6 @@ function logout() {
                     conducted_by: currentUser.name
                 };
                 
-                // Upload da imagem do prêmio se houver
                 if (giveawayPrizePhotoFile) {
                     console.log('📤 Fazendo upload da imagem do prêmio...');
                     const imageUrl = await uploadImage(
@@ -7268,12 +6909,10 @@ function logout() {
                     giveawayData.prize_photo = imageUrl;
                 }
                 
-                // Salvar sorteio no banco de dados
                 console.log('💾 Salvando sorteio no banco de dados...');
                 const success = await saveGiveaway(giveawayData);
                 
                 if (success) {
-                    // Mostrar resultado do sorteio
                     showGiveawayResult(giveawayData);
                     return true;
                 }
@@ -7287,7 +6926,6 @@ function logout() {
             }
         }
 
-        // Salvar sorteio no banco de dados
         async function saveGiveaway(giveawayData) {
             try {
                 if (isOnline) {
@@ -7298,13 +6936,11 @@ function logout() {
                     
                     if (error) throw error;
                     
-                    // Adicionar à lista local
                     giveaways.unshift(data[0]);
                     saveToLocalStorage('giveaways', giveaways);
                     
                     console.log('✅ Sorteio salvo no banco de dados:', data[0]);
                 } else {
-                    // Modo offline
                     giveawayData.id = 'giveaway_' + Date.now();
                     giveawayData.created_at = new Date().toISOString();
                     
@@ -7314,7 +6950,6 @@ function logout() {
                     console.log('✅ Sorteio salvo localmente:', giveawayData);
                 }
                 
-                // Atualizar interface
                 renderGiveaways();
                 
                 return true;
@@ -7324,20 +6959,17 @@ function logout() {
             }
         }
 
-        // Mostrar resultado do sorteio
         function showGiveawayResult(giveawayData) {
             const modal = document.getElementById('giveawayResultModal');
             const winnersContainer = document.getElementById('giveawayResultWinners');
             
             if (!modal || !winnersContainer) return;
             
-            // Atualizar informações do prêmio
             document.getElementById('resultPrizeName').textContent = giveawayData.prize_name;
             document.getElementById('resultPrizeCategory').textContent = giveawayData.prize_category;
             document.getElementById('resultParticipantsCount').textContent = giveawayData.participants_count;
             document.getElementById('resultWinnersCount').textContent = giveawayData.winners_count;
             
-            // Renderizar ganhadores
             winnersContainer.innerHTML = '';
             
             giveawayData.winners.forEach(winner => {
@@ -7359,80 +6991,144 @@ function logout() {
                 winnersContainer.appendChild(winnerElement);
             });
             
-            // Mostrar modal
             modal.style.display = 'flex';
             
-            // Notificar todos os usuários sobre o novo sorteio
             showMessage(`🎉 Novo sorteio realizado: ${giveawayData.prize_name}`, 'success');
         }
 
-        // Ocultar modal de resultado do sorteio
         function hideGiveawayResultModal() {
             const modal = document.getElementById('giveawayResultModal');
             modal.style.display = 'none';
         }
 
-        // Atualizar UI para admin (incluindo botão de sorteio)
-        // Função para atualizar a UI baseado no tipo de usuário - CORRIGIDA
-function updateUIForAdmin() {
-    const isAdmin = isCurrentUserAdmin();
-    const hasUser = !!currentUser;
-    
-    console.log('🔄 Atualizando UI - Admin:', isAdmin, 'Usuário:', hasUser, 'Detalhes:', currentUser);
-    
-    const cadastroSection = document.getElementById('cadastro');
-    const cadastroMenu = document.getElementById('cadastroMenu');
-    const cadastroMenuMobile = document.getElementById('cadastroMenuMobile');
-    const publicRegistrationMenu = document.getElementById('publicRegistrationMenu');
-    const publicRegistrationMenuMobile = document.getElementById('publicRegistrationMenuMobile');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const adminAccessBtn = document.querySelector('.admin-access-btn:not(.logout)');
-    const giveawayAccessBtn = document.getElementById('giveawayAccessBtn');
-    
-    // Controle da seção de cadastro admin
-    if (cadastroSection) {
-        cadastroSection.style.display = isAdmin ? 'block' : 'none';
-        console.log('📝 Seção cadastro admin:', cadastroSection.style.display);
-    }
-    
-    // Controle dos menus de cadastro
-    if (cadastroMenu) {
-        cadastroMenu.style.display = isAdmin ? 'list-item' : 'none';
-    }
-    if (cadastroMenuMobile) {
-        cadastroMenuMobile.style.display = isAdmin ? 'block' : 'none';
-    }
-    
-    // Controle dos menus de cadastro público
-    if (publicRegistrationMenu) {
-        publicRegistrationMenu.style.display = !isAdmin ? 'list-item' : 'none';
-    }
-    if (publicRegistrationMenuMobile) {
-        publicRegistrationMenuMobile.style.display = !isAdmin ? 'block' : 'none';
-    }
-    
-    // Controle dos botões de acesso
-    if (logoutBtn) {
-        logoutBtn.style.display = hasUser ? 'inline-block' : 'none';
-    }
-    
-    if (adminAccessBtn) {
-        adminAccessBtn.style.display = !hasUser ? 'inline-block' : 'none';
-    }
-    
-    // Controle do botão de sorteio
-    if (giveawayAccessBtn) {
-        giveawayAccessBtn.style.display = isAdmin ? 'inline-block' : 'none';
-    }
-    
-    // Atualiza menus mobile
-    updateMobileMenus();
-    
-    console.log('✅ UI atualizada - Logout visível:', logoutBtn?.style.display, 'Admin acesso visível:', adminAccessBtn?.style.display);
-}
+        function updateMobileMenus() {
+            const isAdmin = isCurrentUserAdmin();
+            const cadastroMenuMobile = document.getElementById('cadastroMenuMobile');
+            const publicRegistrationMenuMobile = document.getElementById('publicRegistrationMenuMobile');
+            
+            if (cadastroMenuMobile) {
+                cadastroMenuMobile.style.display = isAdmin ? 'block' : 'none';
+            }
+            
+            if (publicRegistrationMenuMobile) {
+                publicRegistrationMenuMobile.style.display = isAdmin ? 'none' : 'block';
+            }
+        }
 
-        // ========== INICIALIZAÇÃO DO SISTEMA DE SORTEIOS ==========
+        function checkAndCleanSession() {
+            const currentUsers = loadFromLocalStorage('current_users') || [];
+            
+            if (currentUsers.length > 0 && !currentUser) {
+                currentUser = currentUsers[currentUsers.length - 1];
+                console.log('🔄 Sessão recuperada:', currentUser);
+            }
+            
+            const now = new Date().getTime();
+            const validUsers = currentUsers.filter(user => {
+                if (user.loginTime) {
+                    return (now - user.loginTime) < (24 * 60 * 60 * 1000);
+                }
+                return true;
+            });
+            
+            if (validUsers.length < currentUsers.length) {
+                saveToLocalStorage('current_users', validUsers);
+                console.log('🧹 Sessões expiradas removidas');
+            }
+        }
         
+        // ========== INICIALIZAÇÃO ==========
+        async function initializeApp() {
+            try {
+                console.log('🚀 Inicializando aplicação...');
+                
+                users = [];
+                members = [];
+                pendingMembers = [];
+                events = [];
+                partners = [];
+                storeItems = [];
+                eventChats = {};
+                eventPhotosFiles = [];
+                pageAccessCount = 0;
+                
+                const supabaseInitialized = await initializeSupabase();
+                
+                const currentUsers = loadFromLocalStorage('current_users') || [];
+                if (currentUsers.length > 0) {
+                    currentUser = currentUsers[currentUsers.length - 1];
+                    console.log('👤 Usuário atual recuperado:', currentUser);
+                }
+                
+                addLogoutButton();
+                
+                setupEventListeners();
+                setupMobileMenu();
+                checkAndCleanSession();
+                
+                await trackPageAccess();
+                
+                await syncLocalAccesses();
+                
+                console.log('📥 Carregando dados...');
+                await Promise.all([
+                    loadUsers(),
+                    loadMembers(),
+                    loadEvents(),
+                    loadPartners(),
+                    loadStoreItems(),
+                    loadEventChats(),
+                    loadGiveaways() 
+                ]);
+                
+                updateUIForAdmin();
+                
+                const storedState = localStorage.getItem('birthdayMonthCardExpanded');
+                if (storedState === 'false') {
+                    toggleBirthdayMonthCard(false);
+                }
+                
+                if (supabaseInitialized) {
+                    showMessage('✅ Sistema conectado!', 'success');
+                } else {
+                    showMessage('📴 Sistema em modo offline. Dados salvos localmente.', 'warning');
+                }
+                
+                console.log('🎉 Aplicação inicializada com sucesso!');
+                
+            } catch (error) {
+                console.error('❌ Erro na inicialização do app:', error);
+                showMessage('❌ Erro ao inicializar o sistema: ' + error.message, 'error');
+            }
+        }
+
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            if (mobileMenuBtn && mobileNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenuBtn.classList.toggle('active');
+                    mobileNav.classList.toggle('show');
+                    
+                    const mobileLinks = mobileNav.querySelectorAll('a');
+                    mobileLinks.forEach(link => {
+                        link.addEventListener('click', () => {
+                            mobileMenuBtn.classList.remove('active');
+                            mobileNav.classList.remove('show');
+                        });
+                    });
+                });
+                
+                document.addEventListener('click', function(event) {
+                    if (!mobileMenuBtn.contains(event.target) && !mobileNav.contains(event.target)) {
+                        mobileMenuBtn.classList.remove('active');
+                        mobileNav.classList.remove('show');
+                    }
+                });
+            }
+        }
+
         // Adicionar event listener para o formulário de sorteio
         document.addEventListener('DOMContentLoaded', function() {
             const giveawayForm = document.getElementById('giveawayForm');
@@ -7452,7 +7148,6 @@ function updateUIForAdmin() {
                         winners_count: document.getElementById('giveawayWinnersCount').value
                     };
                     
-                    // Validações
                     if (!formData.prize_name || !formData.prize_price || !formData.prize_category) {
                         showMessage('Por favor, preencha todos os campos obrigatórios.', 'error');
                         return;
@@ -7468,13 +7163,11 @@ function updateUIForAdmin() {
                         return;
                     }
                     
-                    // Verificar critérios
                     if (currentGiveawayCriteria === 'role' && selectedRolesForGiveaway.length === 0) {
                         showMessage('Por favor, selecione pelo menos um cargo para o critério de sorteio.', 'error');
                         return;
                     }
                     
-                    // Realizar sorteio
                     const success = await conductGiveaway(formData);
                     
                     if (success) {
@@ -7483,30 +7176,6 @@ function updateUIForAdmin() {
                 });
             }
         });
-// Função para verificar e limpar sessão ao carregar
-function checkAndCleanSession() {
-    const currentUsers = loadFromLocalStorage('current_users') || [];
-    
-    // Se há usuários salvos mas currentUser está null, sincroniza
-    if (currentUsers.length > 0 && !currentUser) {
-        currentUser = currentUsers[currentUsers.length - 1];
-        console.log('🔄 Sessão recuperada:', currentUser);
-    }
-    
-    // Limpa sessões muito antigas (mais de 24 horas)
-    const now = new Date().getTime();
-    const validUsers = currentUsers.filter(user => {
-        if (user.loginTime) {
-            return (now - user.loginTime) < (24 * 60 * 60 * 1000); // 24 horas
-        }
-        return true; // Mantém usuários sem timestamp
-    });
-    
-    if (validUsers.length < currentUsers.length) {
-        saveToLocalStorage('current_users', validUsers);
-        console.log('🧹 Sessões expiradas removidas');
-    }
-}
         
         // Inicia a aplicação quando o DOM estiver pronto
         if (document.readyState === 'loading') {
@@ -7516,8 +7185,6 @@ function checkAndCleanSession() {
         } else {
             setTimeout(initializeApp, 100);
         }
-
-        
     </script>
 </body>
 </html>
